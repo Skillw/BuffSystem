@@ -1,25 +1,62 @@
 plugins {
-    java
-    id("io.izzel.taboolib") version "1.30"
-    id("org.jetbrains.kotlin.jvm") version "1.5.10"
+    `java-library`
+    `maven-publish`
+    id("io.izzel.taboolib") version "1.41"
+    id("org.jetbrains.kotlin.jvm") version "1.6.10"
+    id("org.jetbrains.dokka") version "1.6.10"
 }
-
+tasks.dokkaHtml.configure {
+    outputDirectory.set(File("C:\\Users\\Administrator\\Desktop\\Doc\\buffsystem"))
+    suppressObviousFunctions.set(false)
+    suppressInheritedMembers.set(true)
+}
 taboolib {
+//    options("skip-kotlin-relocate")
+    
+    description {
+        contributors {
+            name("Glom_")
+        }
+        dependencies {
+            name("AttributeSystem").optional(true)
+            name("AttributePlus").optional(true)
+            name("OriginAttribute").optional(true)
+            name("SX-Attribute").optional(true)
+            name("Pouvoir")
+        }
+    }
+    install("module-configuration")
+    install("module-lang")
     install("common")
+    install("module-chat")
+    install("common-5")
+
     install("platform-bukkit")
+    install("module-metrics")
     classifier = null
-    version = "6.0.3-18"
+    version = "6.0.9-35"
 }
 
 repositories {
     mavenCentral()
 }
 
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs = listOf("-Xjvm-default=all")
+    }
+}
 dependencies {
-    compileOnly("ink.ptms.core:v11701:11701:mapped")
-    compileOnly("ink.ptms.core:v11701:11701:universal")
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.6.10")
+    compileOnly("ink.ptms:nms-all:1.0.0")
+    compileOnly("ink.ptms.core:v11800:11800-minimize:mapped")
+    compileOnly("ink.ptms.core:v11800:11800-minimize:api")
     compileOnly(kotlin("stdlib"))
     compileOnly(fileTree("libs"))
+    compileOnly("com.google.code.gson:gson:2.9.0")
+
 }
 
 tasks.withType<JavaCompile> {
@@ -29,4 +66,25 @@ tasks.withType<JavaCompile> {
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+publishing {
+    repositories {
+        maven {
+            url = uri("https://repo.tabooproject.org/repository/releases")
+            credentials {
+                username = project.findProperty("taboolibUsername").toString()
+                password = project.findProperty("taboolibPassword").toString()
+            }
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("library") {
+            from(components["java"])
+            groupId = project.group.toString()
+        }
+    }
 }

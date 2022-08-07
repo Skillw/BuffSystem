@@ -1,0 +1,6 @@
+example:
+  name: '示例Buff'
+  conditions:
+    - 'time'
+  effects:
+    - 'example-attribute'
