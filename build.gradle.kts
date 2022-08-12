@@ -5,14 +5,14 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
     id("org.jetbrains.dokka") version "1.6.10"
 }
-tasks.dokkaHtml.configure {
+tasks.dokkaJavadoc.configure {
     outputDirectory.set(File("C:\\Users\\Administrator\\Desktop\\Doc\\buffsystem"))
     suppressObviousFunctions.set(false)
     suppressInheritedMembers.set(true)
 }
 taboolib {
 //    options("skip-kotlin-relocate")
-    
+
     description {
         contributors {
             name("Glom_")
@@ -20,21 +20,21 @@ taboolib {
         dependencies {
             name("AttributeSystem").optional(true)
             name("AttributePlus").optional(true)
-            name("OriginAttribute").optional(true)
             name("SX-Attribute").optional(true)
+            name("OriginAttribute").optional(true)
             name("Pouvoir")
         }
     }
     install("module-configuration")
     install("module-lang")
-    install("common")
     install("module-chat")
-    install("common-5")
-
+    install("common")
     install("platform-bukkit")
     install("module-metrics")
+    install("common-5")
+
     classifier = null
-    version = "6.0.9-35"
+    version = "6.0.9-54"
 }
 
 repositories {
@@ -73,8 +73,8 @@ publishing {
         maven {
             url = uri("https://repo.tabooproject.org/repository/releases")
             credentials {
-                username = project.findProperty("taboolibUsername").toString()
                 password = project.findProperty("taboolibPassword").toString()
+                username = project.findProperty("taboolibUsername").toString()
             }
             authentication {
                 create<BasicAuthentication>("basic")

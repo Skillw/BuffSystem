@@ -8,6 +8,7 @@ command-info:
   - '    &d- &ehelp &5—— &a显示帮助.'
   - '    &d- &eadd &b[玩家名] [Key] [Buff] [Data Json] &5—— &a给玩家Buff.'
   - '    &d- &eremove &b[玩家名] [Key] &5—— &a删除玩家Buff'
+  - '    &d- &eremoveIf &b[玩家名] [Data Json] &5—— &a删除玩家符合条件的Buff'
   - '    &d- &eaddEntity [Key] [Buff] [Data Json] &5—— &a给所视实体Buff'
   - '    &d- &eremoveEntity [Key] &5—— &a删除所视实体Buff'
   - '    &d- &eclear (玩家名) &5—— &a清除所视实体(不带玩家参数)/玩家 的 Buff'

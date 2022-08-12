@@ -27,4 +27,10 @@ object BuffAPI {
     fun LivingEntity.removeBuff(key: String) {
         buffDataManager.removeBuff(this, key)
     }
+
+
+    @JvmStatic
+    fun LivingEntity.removeIf(key: String, json: String) {
+        buffDataManager.removeIf(this, json)
+    }
 }

@@ -2,6 +2,7 @@ package com.skillw.buffsystem.internal.command
 
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.BuffSystem.buffDataManager
+import com.skillw.buffsystem.util.GsonUtils.parseToMap
 import com.skillw.pouvoir.util.EntityUtils.getDisplayName
 import com.skillw.pouvoir.util.EntityUtils.getEntityRayHit
 import com.skillw.pouvoir.util.EntityUtils.livingEntity
@@ -22,7 +23,7 @@ import taboolib.module.chat.colored
 import taboolib.module.lang.asLangText
 import taboolib.module.lang.sendLang
 import taboolib.platform.util.sendLang
-import java.util.UUID
+import java.util.*
 
 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
 @CommandHeader(name = "buff", permission = "buff.command")
@@ -58,6 +59,9 @@ object BuffCommand {
                         BuffSystem.buffManager.map { it.key }
                     }
                     dynamic {
+                        suggestion<ProxyCommandSender>(uncheck = true) { sender, context ->
+                            listOf("{}")
+                        }
                         execute<ProxyCommandSender> { sender, context, argument ->
                             if (!sender.hasPermission("buff.command.add")) {
                                 sender.sendLang("command-no-permission")
@@ -84,6 +88,9 @@ object BuffCommand {
                     BuffSystem.buffManager.map { it.key }
                 }
                 dynamic {
+                    suggestion<ProxyCommandSender>(uncheck = true) { sender, context ->
+                        listOf("{}")
+                    }
                     execute<ProxyPlayer> { sender, context, argument ->
                         if (!sender.hasPermission("buff.command.add")) {
                             sender.sendLang("command-no-permission")
@@ -110,7 +117,8 @@ object BuffCommand {
             }
             dynamic {
                 suggestion<ProxyCommandSender>(uncheck = true) { sender, context ->
-                    buffDataManager[Bukkit.getPlayer(context.argument(-1))?.uniqueId ?: return@suggestion emptyList<String>()]?.map {
+                    buffDataManager[Bukkit.getPlayer(context.argument(-1))?.uniqueId
+                        ?: return@suggestion emptyList<String>()]?.map {
                         it.key
                     }
                 }
@@ -119,7 +127,9 @@ object BuffCommand {
                         sender.sendLang("command-no-permission")
                         return@execute
                     }
-                    val entity = Bukkit.getPlayer(context.argument(-1)) ?: runCatching { UUID.fromString(context.argument(-1)).livingEntity() }.getOrNull()
+                    val entity = Bukkit.getPlayer(context.argument(-1)) ?: runCatching {
+                        UUID.fromString(context.argument(-1)).livingEntity()
+                    }.getOrNull()
                     if (entity == null) {
                         sender.sendLang("command-valid-player", context.argument(-1))
                         return@execute
@@ -243,7 +253,7 @@ object BuffCommand {
         buffDataManager.giveBuff(entity, key, buff, json)
         submit {
             sender.sendLang(
-                "command-give-buff", entity.getDisplayName().colored(),key, buffKey,
+                "command-give-buff", entity.getDisplayName().colored(), key, buffKey,
                 buffDataManager[entity.uniqueId]?.get(key)?.let {
                     buff.status(
                         entity,
@@ -291,4 +301,36 @@ object BuffCommand {
         }
     }
 
+    @CommandBody
+    val removeIf = subCommand {
+        dynamic {
+            suggestion<ProxyCommandSender>(uncheck = true) { sender, context ->
+                onlinePlayers().map { it.name }
+            }
+            dynamic {
+                suggestion<ProxyCommandSender>(uncheck = true) { sender, context ->
+                    listOf("{}")
+                }
+                execute<ProxyCommandSender> { sender, context, argument ->
+                    if (!sender.hasPermission("buff.command.removeif")) {
+                        sender.sendLang("command-no-permission")
+                        return@execute
+                    }
+                    val entity = Bukkit.getPlayer(context.argument(-1)) ?: runCatching {
+                        UUID.fromString(context.argument(-1)).livingEntity()
+                    }.getOrNull()
+                    if (entity == null) {
+                        sender.sendLang("command-valid-player", context.argument(-1))
+                        return@execute
+                    }
+                    val buffData = buffDataManager[entity.uniqueId] ?: return@execute
+                    val condition = argument.parseToMap()
+                    buffData.filterValues { data -> condition.all { (key, value) -> data[key.toString()] == value } }
+                        .forEach { (key, _) ->
+                            removeBuff(entity, key, sender)
+                        }
+                }
+            }
+        }
+    }
 }

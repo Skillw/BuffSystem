@@ -14,6 +14,7 @@ import com.skillw.pouvoir.api.annotation.AutoRegister
 import com.skillw.pouvoir.util.NumberUtils.format
 import org.bukkit.entity.LivingEntity
 import taboolib.common.platform.function.warning
+import taboolib.common5.Coerce
 import kotlin.math.max
 
 /**
@@ -43,7 +44,7 @@ object TimeCondition : BuffCondition {
         if (!data.containsKey("duration")) {
             warning("The Buff ${data.buffKey} taken effect now has no parma of 'duration'!")
         }
-        val duration = data.getAs<Number>("duration")?.toInt() ?: 0
+        val duration = Coerce.toInteger(data.get("duration"))
 
         data["start"] = currentTick.toInt()
         data["end"] = (if (duration != -1) currentTick + duration else -1).toInt()
@@ -52,13 +53,14 @@ object TimeCondition : BuffCondition {
     override fun isDeleted(entity: LivingEntity, data: BuffData): Boolean = isDated(data)
 
     fun isDated(data: BuffData): Boolean {
-        val end = data.getAs<Number>("end")?.toInt() ?: return false
+        val end = Coerce.toInteger(data.get("end"))
+        val current = currentTick.also { data["currentTick"] = it }
         if (end == -1) return false
-        return currentTick >= end
+        return current >= end
     }
 
     fun remainder(data: BuffData): Long {
-        val end = data.getAs<Number>("end")?.toInt() ?: return 0
+        val end = Coerce.toInteger(data.get("end"))
         if (end == -1) return -1
         val remainder = end - currentTick
         return max(remainder, 0L)

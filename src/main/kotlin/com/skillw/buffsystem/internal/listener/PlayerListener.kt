@@ -22,6 +22,9 @@ object PlayerListener {
         if (buffDataCompound == null) buffDataCompound = BuffDataCompound(uuid)
         buffDataCompound.register()
         Pouvoir.containerManager[name, "buff-data"] = "null"
+        player.activePotionEffects.forEach {
+            player.removePotionEffect(it.type)
+        }
     }
 
 

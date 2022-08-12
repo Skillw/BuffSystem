@@ -16,7 +16,7 @@ import taboolib.module.lang.sendLang
  * @constructor Buff Condition Key: String
  */
 @AutoRegister
-object BuffCondition : ScriptAnnotation("BuffCondition") {
+object BuffCondition : ScriptAnnotation("BuffCondition", fileAnnotation = true) {
     override fun handle(data: ScriptAnnotationData) {
         val script = data.script
         val args = data.args.toArgs()

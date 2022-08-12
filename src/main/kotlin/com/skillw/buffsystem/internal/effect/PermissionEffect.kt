@@ -2,20 +2,17 @@ package com.skillw.buffsystem.internal.effect
 
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
-import com.skillw.buffsystem.api.event.EffectLoadEvent
 import com.skillw.pouvoir.Pouvoir
 import com.skillw.pouvoir.api.map.BaseMap
 import com.skillw.pouvoir.util.MapUtils.put
-import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
-import taboolib.common.platform.event.SubscribeEvent
 import taboolib.common5.Coerce
 import taboolib.platform.compat.VaultService
 import java.util.*
 
-class PermissionEffect(override val key: String, val permissions: List<String>) : BaseEffect(),
+class PermissionEffect(key: String, val permissions: List<String>) : BaseEffect(key),
     ConfigurationSerializable {
 
     init {
@@ -26,7 +23,7 @@ class PermissionEffect(override val key: String, val permissions: List<String>) 
         if (entity !is Player) return
         val player = entity
         val uuid = player.uniqueId
-        val permissionStr = data.replace(this.permissions).map { Pouvoir.pouPlaceHolderAPI.replace(player, it) }
+        val permissionStr = data.handle(this.permissions).map { Pouvoir.pouPlaceHolderAPI.replace(player, it) }
         permissionMap[uuid]?.clear()
         unrealize(entity, data)
         for (it in permissionStr) {
@@ -59,26 +56,9 @@ class PermissionEffect(override val key: String, val permissions: List<String>) 
 
     companion object {
 
-        @SubscribeEvent
-        fun load(event: EffectLoadEvent) {
-            event.result = deserialize(event.section) ?: return
-        }
-
         private val permissionMap = BaseMap<UUID, BaseMap<String, Boolean>>()
         private val originPermMap = BaseMap<UUID, BaseMap<String, Boolean>>()
 
-        @JvmStatic
-        fun deserialize(section: ConfigurationSection): PermissionEffect? {
-            try {
-                val key = section.name
-                if (section["type"].toString().lowercase() != "permission") return null
-                val permissions = section.getStringList("permissions")
-                return PermissionEffect(key, permissions).apply { config = true }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-            return null
-        }
     }
 
     override fun serialize(): MutableMap<String, Any> {

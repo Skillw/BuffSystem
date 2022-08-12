@@ -5,7 +5,7 @@ import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.pouvoir.api.able.Registrable
 import org.bukkit.entity.LivingEntity
 
-abstract class BaseEffect : Registrable<String> {
+abstract class BaseEffect(override val key: String) : Registrable<String> {
     var config = false
     var release = false
 

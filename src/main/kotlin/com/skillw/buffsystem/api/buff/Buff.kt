@@ -6,6 +6,7 @@ import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
 import com.skillw.pouvoir.api.able.Registrable
 import com.skillw.pouvoir.api.map.LinkedKeyMap
+import com.skillw.pouvoir.util.FileUtils.toMap
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.entity.LivingEntity
@@ -13,11 +14,12 @@ import java.util.*
 
 /**
  * @className Buff
+ *
  * @author Glom
- * @date 2022/7/17 23:38
- * Copyright  2022 user. All rights reserved.
+ * @date 2022/7/17 23:38 Copyright 2022 user. All rights reserved.
  */
 open class Buff(override val key: String, val name: String) : Registrable<String>, ConfigurationSerializable {
+    val data = HashMap<String, Any>()
     var config = false
 
     internal val conditions = LinkedKeyMap<String, BuffCondition>()
@@ -110,10 +112,24 @@ open class Buff(override val key: String, val name: String) : Registrable<String
             try {
                 val key = section.name
                 val name = section["name"].toString()
+                val data = section.getConfigurationSection("data")?.toMap() ?: emptyMap()
                 val conditions = section.getStringList("conditions").mapNotNull { BuffSystem.conditionManager[it] }
                     .associateBy { it.key }
-                val effects = section.getStringList("effects").mapNotNull { BuffSystem.effectManager[it] }
+                val effects = LinkedList<BaseEffect>()
+                section.getList("effects")?.forEach {
+                    when (it) {
+                        is String -> BuffSystem.effectManager[it]
+
+                        is Map<*, *> -> BuffSystem.effectBuilderManager.build(
+                            UUID.randomUUID().toString(),
+                            it as? Map<String, Any>? ?: return@forEach
+                        )?.apply { register() }
+
+                        else -> null
+                    }?.let { effect -> effects.add(effect) } ?: return@forEach
+                } ?: return null
                 val buff = Buff(key, name)
+                buff.data.putAll(data)
                 buff.conditions.putAll(conditions)
                 buff.effects.addAll(effects)
                 buff.config = true

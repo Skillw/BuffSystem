@@ -10,7 +10,6 @@ import taboolib.common.platform.Plugin
 import taboolib.module.configuration.Config
 import taboolib.module.configuration.ConfigFile
 import taboolib.platform.BukkitPlugin
-import taboolib.platform.util.onlinePlayers
 
 object BuffSystem : Plugin(), SubPouvoir {
 
@@ -36,6 +35,10 @@ object BuffSystem : Plugin(), SubPouvoir {
     @JvmStatic
     @PouManager
     lateinit var conditionManager: ConditionManager
+
+    @JvmStatic
+    @PouManager
+    lateinit var effectBuilderManager: EffectBuilderManager
 
     @JvmStatic
     @PouManager
@@ -66,11 +69,6 @@ object BuffSystem : Plugin(), SubPouvoir {
     }
 
     override fun onDisable() {
-        onlinePlayers.forEach { player ->
-            player.activePotionEffects.forEach {
-                player.removePotionEffect(it.type)
-            }
-        }
         disable()
     }
 

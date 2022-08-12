@@ -8,6 +8,7 @@ command-info:
   - '    &d- &ehelp &5—— &aShow help.'
   - '    &d- &eadd &b[Player] [Key] [Buff] [Data Json] &5—— &aGive Buff to a Player.'
   - '    &d- &eremove &b[Player] [Key] &5—— &aRemove a Buff on Player'
+  - '    &d- &eremoveIf &b[Player] [Data Json] &5—— &aRemove a Buff on Player if it matches the Data Json.'
   - '    &d- &eaddEntity [Key] [Buff] [Data Json] &5—— &aGive Buff to the Entity you look at'
   - '    &d- &eremoveEntity [Key] &5—— &aRemove Buff to the Entity you look at'
   - '    &d- &eclear (Player) &5—— &aClear all Buffs on Player / Entity you look at (Without Player Parameter)'

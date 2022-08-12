@@ -1,14 +1,14 @@
 package com.skillw.buffsystem.api.data
 
-import com.google.gson.Gson
 import com.skillw.buffsystem.BuffSystem
+import com.skillw.buffsystem.util.GsonUtils.parseToMap
 import com.skillw.pouvoir.api.able.Registrable
 import com.skillw.pouvoir.api.map.KeyMap
 import com.skillw.pouvoir.util.EntityUtils.livingEntity
 import java.util.*
 
 class BuffDataCompound(
-    override val key: UUID
+    override val key: UUID,
 ) : Registrable<UUID>, KeyMap<String, BuffData>() {
 
     val entity
@@ -29,10 +29,9 @@ class BuffDataCompound(
         fun deserialize(uuid: UUID, string: String): BuffDataCompound {
             val compound = BuffDataCompound(uuid)
             if (string == "null") return compound
-            val json = Gson().fromJson(string, Map::class.java)
-            json.forEach {
-                compound[it.key.toString()] =
-                    BuffData.deserialize(it.key.toString(), uuid, it.value?.toString() ?: return@forEach)
+            string.parseToMap().forEach {
+                compound[it.key] =
+                    BuffData.deserialize(it.key, uuid, it.value.toString())
             }
             return compound
         }

@@ -1,9 +1,9 @@
 package com.skillw.buffsystem.internal.manager
 
 import com.skillw.buffsystem.BuffSystem
-import com.skillw.buffsystem.api.event.EffectLoadEvent
 import com.skillw.buffsystem.api.manager.EffectManager
 import com.skillw.pouvoir.util.FileUtils.loadYamls
+import com.skillw.pouvoir.util.FileUtils.toMap
 import java.io.File
 
 object EffectManagerImpl : EffectManager() {
@@ -22,9 +22,8 @@ object EffectManagerImpl : EffectManager() {
             .forEach { yaml ->
                 for (key in yaml.getKeys(false)) {
                     val section = yaml.getConfigurationSection(key) ?: continue
-                    val event = EffectLoadEvent(section)
-                    event.call()
-                    event.result?.also { it.config = true; it.register(); }
+                    BuffSystem.effectBuilderManager.build(section.name, section.toMap())
+                        ?.apply { config = true; register() }
                 }
             }
 
