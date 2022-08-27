@@ -1,6 +1,6 @@
-package com.skillw.buffsystem.internal.clock
+package com.skillw.buffsystem.internal.feature.clock
 
-import com.skillw.pouvoir.Pouvoir
+import com.skillw.buffsystem.internal.feature.compat.pouvoir.container.BuffContainer
 import taboolib.common.LifeCycle
 import taboolib.common.platform.Awake
 import taboolib.common.platform.function.submit
@@ -14,7 +14,7 @@ object Clock {
 
     @Awake(LifeCycle.ACTIVE)
     fun start() {
-        currentTick = Coerce.toLong(Pouvoir.containerManager["BUFF", "CLOCK_TICKS"])
+        currentTick = Coerce.toLong(BuffContainer["BUFF", "CLOCK_TICKS"])
         submit(async = true, period = 1) {
             currentTick++
         }
@@ -22,6 +22,6 @@ object Clock {
 
     @Awake(LifeCycle.DISABLE)
     fun disable() {
-        Pouvoir.containerManager["BUFF", "CLOCK_TICKS"] = currentTick
+        BuffContainer["BUFF", "CLOCK_TICKS"] = currentTick
     }
 }

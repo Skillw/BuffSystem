@@ -1,4 +1,4 @@
-package com.skillw.buffsystem.internal.listener
+package com.skillw.buffsystem.internal.feature.listener
 
 import com.destroystokyo.paper.event.entity.EntityRemoveFromWorldEvent
 import com.skillw.buffsystem.BuffSystem

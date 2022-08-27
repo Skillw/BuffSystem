@@ -108,26 +108,34 @@ open class Buff(override val key: String, val name: String) : Registrable<String
 
     companion object {
         @JvmStatic
+        fun loadBuffs(map: List<Any>): List<Buff> {
+            val buffs = LinkedList<Buff>()
+            map.forEach {
+                when (it) {
+                    is String -> BuffSystem.buffManager[it]
+
+                    is Map<*, *> -> build(UUID.randomUUID().toString(), it as Map<String, Any>)
+
+                    else -> null
+                }?.let { effect -> buffs.add(effect) } ?: return@forEach
+            }
+            return buffs
+        }
+
+        @JvmStatic
         fun deserialize(section: ConfigurationSection): Buff? {
+            return build(section.name, section.toMap())
+        }
+
+        @JvmStatic
+        fun build(key: String, map: Map<String, Any>): Buff? {
             try {
-                val key = section.name
-                val name = section["name"].toString()
-                val data = section.getConfigurationSection("data")?.toMap() ?: emptyMap()
-                val conditions = section.getStringList("conditions").mapNotNull { BuffSystem.conditionManager[it] }
-                    .associateBy { it.key }
-                val effects = LinkedList<BaseEffect>()
-                section.getList("effects")?.forEach {
-                    when (it) {
-                        is String -> BuffSystem.effectManager[it]
-
-                        is Map<*, *> -> BuffSystem.effectBuilderManager.build(
-                            UUID.randomUUID().toString(),
-                            it as? Map<String, Any>? ?: return@forEach
-                        )?.apply { register() }
-
-                        else -> null
-                    }?.let { effect -> effects.add(effect) } ?: return@forEach
-                } ?: return null
+                val name = map["name"].toString()
+                val data = map["data"] as? Map<String, Any>? ?: emptyMap()
+                val conditions =
+                    (map["conditions"] as? List<String>? ?: emptyList()).mapNotNull { BuffSystem.conditionManager[it] }
+                        .associateBy { it.key }
+                val effects = BaseEffect.loadEffects(map["effects"] as? List<Any>? ?: emptyList())
                 val buff = Buff(key, name)
                 buff.data.putAll(data)
                 buff.conditions.putAll(conditions)
@@ -144,7 +152,9 @@ open class Buff(override val key: String, val name: String) : Registrable<String
     override fun serialize(): MutableMap<String, Any> {
         return linkedMapOf(
             "conditions" to conditions.map { it.key },
-            "effects" to effects.map { it.key })
+            "effects" to LinkedHashMap<String, Any>().apply {
+                effects.forEach { put(it.key, it.serialize()) }
+            })
     }
 
     fun status(entity: LivingEntity, data: BuffData): String {

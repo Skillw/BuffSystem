@@ -2,7 +2,6 @@ package com.skillw.buffsystem.internal.effect
 
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
-import com.skillw.pouvoir.Pouvoir
 import com.skillw.pouvoir.api.map.BaseMap
 import com.skillw.pouvoir.util.MapUtils.put
 import org.bukkit.Bukkit
@@ -36,7 +35,7 @@ class PotionEffect(key: String, private val potions: List<String>) : BaseEffect(
 
     override fun realize(entity: LivingEntity, data: BuffData) {
         val uuid = entity.uniqueId
-        val potionsStr = data.handle(this.potions).map { Pouvoir.pouPlaceHolderAPI.replace(entity, it) }
+        val potionsStr = data.run { potions.handle().map { it.toString() } }
         submit {
             potionMap[entity.uniqueId]?.clear()
             for (it in potionsStr) {
@@ -51,7 +50,7 @@ class PotionEffect(key: String, private val potions: List<String>) : BaseEffect(
     }
 
     override fun unrealize(entity: LivingEntity, data: BuffData) {
-        if (!Bukkit.isStopping())
+        if (Bukkit.getPluginManager().isPluginEnabled("BuffSystem"))
             submit {
                 potionMap[entity.uniqueId]?.forEach { entity.removePotionEffect(it) }
                 potionMap[entity.uniqueId]?.clear()
@@ -68,7 +67,13 @@ class PotionEffect(key: String, private val potions: List<String>) : BaseEffect(
     }
 
     override fun serialize(): MutableMap<String, Any> {
-        return linkedMapOf("type" to "potion", "potions" to potions)
+        return linkedMapOf(
+            "type" to "potion",
+            "potions" to potions,
+            "ambient" to ambient,
+            "particles" to particles,
+            "icon" to icon
+        )
     }
 
     override fun hashCode(): Int {

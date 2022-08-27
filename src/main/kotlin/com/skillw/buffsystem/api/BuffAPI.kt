@@ -7,6 +7,14 @@ import org.bukkit.entity.LivingEntity
 import java.util.function.Consumer
 
 object BuffAPI {
+
+    @JvmStatic
+    fun LivingEntity.hasBuff(key:String) :Boolean {
+       return buffDataManager[uniqueId]?.containsKey(key) == true
+    }
+
+
+
     @JvmStatic
     fun LivingEntity.giveBuff(key: String, buff: Buff, consumer: Consumer<BuffData>? = null) {
         buffDataManager.giveBuff(this, key, buff, consumer)

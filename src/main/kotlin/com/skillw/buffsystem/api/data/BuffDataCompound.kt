@@ -16,7 +16,7 @@ class BuffDataCompound(
 
     fun execAll() {
         forEach {
-            if (!BuffSystem.buffManager.containsKey(it.value.buffKey)) {
+            if (!BuffSystem.buffManager.containsKey(it.value.buff.key)) {
                 this.remove(it.key)
                 return@forEach
             }
@@ -31,7 +31,7 @@ class BuffDataCompound(
             if (string == "null") return compound
             string.parseToMap().forEach {
                 compound[it.key] =
-                    BuffData.deserialize(it.key, uuid, it.value.toString())
+                    BuffData.deserialize(it.key, uuid, it.value.toString()) ?: return@forEach
             }
             return compound
         }

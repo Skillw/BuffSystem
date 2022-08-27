@@ -2,12 +2,12 @@ package com.skillw.buffsystem.internal.effect
 
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
-import com.skillw.pouvoir.Pouvoir
 import com.skillw.pouvoir.api.map.BaseMap
 import com.skillw.pouvoir.util.MapUtils.put
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
+import taboolib.common.platform.function.submit
 import taboolib.common5.Coerce
 import taboolib.platform.compat.VaultService
 import java.util.*
@@ -23,7 +23,7 @@ class PermissionEffect(key: String, val permissions: List<String>) : BaseEffect(
         if (entity !is Player) return
         val player = entity
         val uuid = player.uniqueId
-        val permissionStr = data.handle(this.permissions).map { Pouvoir.pouPlaceHolderAPI.replace(player, it) }
+        val permissionStr = data.run { permissions.handle().map { it.toString() } }
         permissionMap[uuid]?.clear()
         unrealize(entity, data)
         for (it in permissionStr) {
@@ -32,10 +32,12 @@ class PermissionEffect(key: String, val permissions: List<String>) : BaseEffect(
             val has = Coerce.toBoolean(array[1])
             VaultService.permission?.let {
                 originPermMap.put(uuid, permission, it.playerHas(player, permission))
-                if (has) {
-                    it.playerAddTransient(player, permission)
-                } else {
-                    it.playerRemoveTransient(player, permission)
+                submit {
+                    if (has) {
+                        it.playerAddTransient(player, permission)
+                    } else {
+                        it.playerRemoveTransient(player, permission)
+                    }
                 }
             }
             permissionMap.put(uuid, permission, has)
@@ -45,10 +47,12 @@ class PermissionEffect(key: String, val permissions: List<String>) : BaseEffect(
     override fun unrealize(entity: LivingEntity, data: BuffData) {
         if (entity !is Player) return
         originPermMap[entity.uniqueId]?.forEach { (permission, has) ->
-            if (has) {
-                VaultService.permission?.playerAddTransient(entity, permission)
-            } else {
-                VaultService.permission?.playerRemoveTransient(entity, permission)
+            submit {
+                if (has) {
+                    VaultService.permission?.playerAddTransient(entity, permission)
+                } else {
+                    VaultService.permission?.playerRemoveTransient(entity, permission)
+                }
             }
         }
         originPermMap.remove(entity.uniqueId)

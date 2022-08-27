@@ -1,4 +1,4 @@
-package com.skillw.buffsystem.internal.annotation
+package com.skillw.buffsystem.internal.feature.compat.pouvoir.annotation
 
 import com.skillw.attsystem.AttributeSystem
 import com.skillw.buffsystem.internal.condition.ScriptBuffCondition

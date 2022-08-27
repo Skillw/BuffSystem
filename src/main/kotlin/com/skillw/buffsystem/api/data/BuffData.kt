@@ -2,13 +2,13 @@ package com.skillw.buffsystem.api.data
 
 
 import com.skillw.buffsystem.BuffSystem
+import com.skillw.buffsystem.BuffSystem.buffManager
 import com.skillw.buffsystem.api.buff.Buff
 import com.skillw.buffsystem.util.GsonUtils.parseToMap
 import com.skillw.pouvoir.api.PouvoirAPI.analysis
-import com.skillw.pouvoir.api.PouvoirAPI.placeholder
 import com.skillw.pouvoir.api.able.Keyable
 import com.skillw.pouvoir.api.map.BaseMap
-import com.skillw.pouvoir.internal.function.context.SimpleContext
+import com.skillw.pouvoir.internal.core.function.context.SimpleContext
 import com.skillw.pouvoir.util.EntityUtils.livingEntity
 import com.skillw.pouvoir.util.GsonUtils.encodeJson
 import java.util.*
@@ -17,31 +17,27 @@ import java.util.function.Consumer
 
 class BuffData(
     override val key: String,
-    val buffKey: String,
+    val buff: Buff,
     val uuid: UUID,
 ) : Keyable<String>, BaseMap<String, Any>() {
 
-    private val context: SimpleContext = SimpleContext(ConcurrentHashMap())
+    private val context = SimpleContext(ConcurrentHashMap())
 
-    constructor(key: String, buff: Buff, uuid: UUID) : this(key, buff.key, uuid)
 
     val entity = uuid.livingEntity()
 
     init {
-        this["buffKey"] = buffKey
-        buff?.data?.let { this.putAll(it) }
+        this["buffKey"] = buff.key
+        buff.data.let { this.putAll(it) }
     }
-
-    val buff: Buff?
-        get() = BuffSystem.buffManager[buffKey]
 
     val uniqueId = UUID.randomUUID()
 
     companion object {
         @JvmStatic
-        fun deserialize(key: String, uuid: UUID, string: String): BuffData {
+        fun deserialize(key: String, uuid: UUID, string: String): BuffData? {
             val json = string.parseToMap()
-            val data = BuffData(key, json["buffKey"].toString(), uuid)
+            val data = BuffData(key, buffManager[json["buffKey"].toString()] ?: return null, uuid)
             json.forEach {
                 data[it.key] = it.value
             }
@@ -52,7 +48,7 @@ class BuffData(
     fun init(consumer: Consumer<BuffData>? = null) {
         consumer?.accept(this)
         entity?.let {
-            buff?.init(it, this)
+            buff.init(it, this)
         }
     }
 
@@ -65,7 +61,7 @@ class BuffData(
         }
         if (!BuffSystem.buffDataManager[uuid]!!.containsKey(key))
             BuffSystem.buffDataManager[uuid]!![key] = this
-        buff?.takeEffect(entity, this)
+        buff.takeEffect(entity, this)
     }
 
     fun remove() {
@@ -77,7 +73,7 @@ class BuffData(
     }
 
     fun unrealize() {
-        buff?.unrealize(entity ?: return, this)
+        buff.unrealize(entity ?: return, this)
     }
 
     fun serialize(): String {
@@ -99,35 +95,46 @@ class BuffData(
         return temp
     }
 
-    fun handle(string: String): String {
-        val value = string.replacement().placeholder(entity ?: return string, false)
-        return value.analysis(context)
+    fun List<*>.handle(): List<Any> {
+        return this.mapNotNull { it?.handle() }
     }
 
-    fun <T> handle(replaces: Collection<T>): List<String> {
-        return replaces.map { handle(it.toString()) }
-    }
-
-    fun handleMap(map: Map<*, *>): Map<String, Any> {
-        return map.mapKeys { it.key.toString() }.mapValues { handle(it.value!!) }
-    }
-
-    fun handle(any: Any): Any {
-        return when (any) {
-            is String -> {
-                handle(any)
-            }
-
-            is Collection<*> -> {
-                handle(any)
-            }
-
-            is Map<*, *> -> {
-                handleMap(any)
-            }
-
-            else -> any
+    fun Any.handle(): Any {
+        return when (this) {
+            is String -> replacement().analysis(context)
+            is List<*> -> handle()
+            is Map<*, *> -> this.handle()
+            else -> this
         }
+    }
+
+    fun Map<*, *>.handle(): MutableMap<String, Any> {
+        val map = HashMap<String, Any>()
+        this.forEach { (keyObj, obj) ->
+            val key = keyObj?.handle()?.toString() ?: return@forEach
+            when (obj) {
+                is Map<*, *> -> {
+                    map[key] = obj.handle()
+                }
+
+                is List<*> -> {
+                    map[key] = obj.handle()
+                }
+
+                is ByteArray -> {
+                    map[key] = obj
+                }
+
+                is IntArray -> {
+                    map[key] = obj
+                }
+
+                else -> {
+                    map[key] = obj?.handle().toString()
+                }
+            }
+        }
+        return map
     }
 
     private fun replacedMap(): Map<String, Any> {

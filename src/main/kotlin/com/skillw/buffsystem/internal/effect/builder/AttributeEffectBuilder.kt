@@ -8,7 +8,7 @@ import com.skillw.pouvoir.api.annotation.AutoRegister
 @AutoRegister
 object AttributeEffectBuilder : EffectBuilder("attribute") {
     override fun build(key: String, map: Map<String, Any>): BaseEffect? {
-        return AttributeEffect(key, map["attributes"] as? List<String>? ?: return null)
+        return AttributeEffect(key, map["attributes"] ?: map["attribute"]  ?: return null,map["conditions"] as? MutableMap<String,Any>? ?: emptyMap())
     }
 
 

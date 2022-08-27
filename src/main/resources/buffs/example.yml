@@ -5,15 +5,15 @@ example:
     level: 1
     debuff: true
     duration: 400
-    name: 攻击力
+    name: PhysicalDamage
     value: 100
   conditions:
     - "time"
   effects:
-    - "example-attribute"
     - type: attribute
-      attribute:
-        - "{name}: {value}"
+      attributes:
+        "{name}":
+          value: "{value}"
     - type: attribute
       attribute:
         - "防御力: 100"
@@ -22,29 +22,25 @@ example:
       permissions:
         - "cmi.command.fly:true"
 
-    - type: potion
-      potions:
-        - "SPEED:10"
-
     - type: boss_bar
       title: Hi
+      #这里用得都是内联函数
+      #因为要把函数嵌入到文本里 所以要用{}括起来
       progress: |-
         {
-        if check number {end} != -1 then
-          calculate '({currentTick} - {start}) / ({end} - {start})'
-        else number 1.0
+          return if check type double {end} > 0.0 then calculate '({currentTick} - {start}) / ({end} - {start})' else { number 1.0 }
         }
       color: |-
         {
         set index ifndef to 0
-        set index to if check &index >= 6 then 0 else type int calculate '{&index} + 1'
+        set index to type int if check &index >= 6 then 0 else calculate '{&index} + 1'
         set colors ifndef to listOf [ PINK BLUE RED GREEN YELLOW PURPLE WHITE ]
-        list &colors get at &index
+        return &colors get at &index
         }
       style: |-
         {
         set index2 ifndef to 0
-        set index2 to if check &index2 >= 4 then 0 else type int calculate '{&index2} + 1'
+        set index2 to type int if check &index2 >= 4 then 0 else calculate '{&index2} + 1'
         set styles ifndef to listOf [ SOLID SEGMENTED_6 SEGMENTED_10 SEGMENTED_12 SEGMENTED_20 ]
-        list &styles get at &index2
+        return &styles get at &index2
         }

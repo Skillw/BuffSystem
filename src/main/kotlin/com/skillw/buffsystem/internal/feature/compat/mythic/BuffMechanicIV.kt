@@ -1,16 +1,12 @@
-package com.skillw.buffsystem.internal.hook.mythic
+package com.skillw.buffsystem.internal.feature.compat.mythic
 
 import com.skillw.buffsystem.BuffSystem
 import io.lumine.xikage.mythicmobs.adapters.AbstractEntity
-import io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMechanicLoadEvent
 import io.lumine.xikage.mythicmobs.io.MythicLineConfig
 import io.lumine.xikage.mythicmobs.skills.ITargetedEntitySkill
 import io.lumine.xikage.mythicmobs.skills.SkillMechanic
 import io.lumine.xikage.mythicmobs.skills.SkillMetadata
 import io.lumine.xikage.mythicmobs.skills.placeholders.parsers.PlaceholderString
-import taboolib.common.platform.event.OptionalEvent
-import taboolib.common.platform.event.SubscribeEvent
-import taboolib.common5.Coerce
 
 
 class BuffMechanicIV(skill: String?, mlc: MythicLineConfig) : SkillMechanic(skill, mlc), ITargetedEntitySkill {
@@ -48,6 +44,11 @@ class BuffMechanicIV(skill: String?, mlc: MythicLineConfig) : SkillMechanic(skil
                 return true
             }
 
+            "removeIf" -> {
+                BuffSystem.buffDataManager.removeIf(uuid, json)
+                return true
+            }
+
             "clear" -> {
                 BuffSystem.buffDataManager.clearBuff(uuid)
                 return true
@@ -59,13 +60,5 @@ class BuffMechanicIV(skill: String?, mlc: MythicLineConfig) : SkillMechanic(skil
         }
     }
 
-    object MMIVListener {
-        @SubscribeEvent(bind = "io.lumine.xikage.mythicmobs.api.bukkit.events.MythicMechanicLoadEvent")
-        fun onMythicMechanicLoad(optionalEvent: OptionalEvent) {
-            val event = optionalEvent.get<MythicMechanicLoadEvent>()
-            if (event.mechanicName.lowercase() == "buff-sys") {
-                event.register(BuffMechanicIV(event.config.line, event.config))
-            }
-        }
-    }
+
 }

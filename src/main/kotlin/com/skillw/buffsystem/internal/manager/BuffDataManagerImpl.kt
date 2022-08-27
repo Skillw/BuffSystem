@@ -4,6 +4,7 @@ import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.buff.Buff
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.manager.BuffDataManager
+import com.skillw.buffsystem.internal.feature.compat.pouvoir.container.BuffContainer
 import com.skillw.buffsystem.util.GsonUtils.parseToMap
 import com.skillw.pouvoir.util.EntityUtils.livingEntity
 import org.bukkit.entity.LivingEntity
@@ -20,7 +21,7 @@ object BuffDataManagerImpl : BuffDataManager() {
     private var buffTask: PlatformExecutor.PlatformTask? = null
 
     private fun createBuffScheduled(): PlatformExecutor.PlatformTask {
-        return submit(period = BSConfig.updateTime) {
+        return submit(async = true, period = BSConfig.updateTime) {
             for ((_, dataCompound) in this@BuffDataManagerImpl) {
                 dataCompound.execAll()
             }
@@ -117,6 +118,9 @@ object BuffDataManagerImpl : BuffDataManager() {
     override fun onDisable() {
         forEach { (_, compound) ->
             compound.unrealize()
+            BuffContainer[compound.entity?.name.toString(), "buff-data"] = compound.serialize()
+            BuffSystem.buffDataManager.remove(compound.key)
         }
+
     }
 }

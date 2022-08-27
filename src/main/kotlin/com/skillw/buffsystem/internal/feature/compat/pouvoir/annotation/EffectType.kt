@@ -1,4 +1,4 @@
-package com.skillw.buffsystem.internal.annotation
+package com.skillw.buffsystem.internal.feature.compat.pouvoir.annotation
 
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.data.BuffData
@@ -42,6 +42,10 @@ object EffectType : ScriptAnnotation("EffectType", fileAnnotation = true) {
 
                     override fun hashCode(): Int {
                         return script.hashCode()
+                    }
+
+                    override fun serialize(): MutableMap<String, Any> {
+                        return map.toMutableMap()
                     }
                 }
             }

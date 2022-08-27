@@ -1,3 +1,5 @@
+import java.net.URL
+
 plugins {
     `java-library`
     `maven-publish`
@@ -7,8 +9,13 @@ plugins {
 }
 tasks.dokkaJavadoc.configure {
     outputDirectory.set(File("C:\\Users\\Administrator\\Desktop\\Doc\\buffsystem"))
-    suppressObviousFunctions.set(false)
-    suppressInheritedMembers.set(true)
+    dokkaSourceSets {
+        configureEach {
+            externalDocumentationLink {
+                url.set(URL("https://doc.skillw.com/pouvoir/"))
+            }
+        }
+    }
 }
 taboolib {
 //    options("skip-kotlin-relocate")
@@ -19,26 +26,27 @@ taboolib {
         }
         dependencies {
             name("AttributeSystem").optional(true)
-            name("AttributePlus").optional(true)
             name("SX-Attribute").optional(true)
             name("OriginAttribute").optional(true)
+            name("AttributePlus").optional(true)
             name("Pouvoir")
         }
     }
     install("module-configuration")
     install("module-lang")
     install("module-chat")
-    install("common")
     install("platform-bukkit")
+    install("common")
     install("module-metrics")
     install("common-5")
 
     classifier = null
-    version = "6.0.9-54"
+    version = "6.0.9-72"
 }
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://mvn.lumine.io/repository/maven-public/") }
 }
 
 
@@ -56,6 +64,7 @@ dependencies {
     compileOnly(kotlin("stdlib"))
     compileOnly(fileTree("libs"))
     compileOnly("com.google.code.gson:gson:2.9.0")
+    compileOnly("io.lumine:Mythic-Dist:5.0.3")
 
 }
 

@@ -3,29 +3,31 @@ package com.skillw.buffsystem.internal.effect
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
 import com.skillw.buffsystem.api.manager.AttributeManager.attrProvider
-import com.skillw.pouvoir.api.PouvoirAPI.placeholder
+import com.skillw.buffsystem.internal.feature.compat.attsystem.AttributeSystemHook
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.entity.LivingEntity
-import org.bukkit.entity.Player
-import taboolib.platform.compat.replacePlaceholder
-import java.util.*
 
-class AttributeEffect(key: String, val attributes: List<String>) : BaseEffect(key),
+class AttributeEffect(key: String, val attributes: Any, val conditions: Map<String, Any> = emptyMap()) :
+    BaseEffect(key),
     ConfigurationSerializable {
 
 
-    private val sourceKey = "attribute-effect-$key-source-${UUID.randomUUID()}"
     private fun getSource(data: BuffData): String {
-        return data.getOrPut(sourceKey) { sourceKey }.toString()
+        return "attribute-effect-$key-source-${data.key}}"
     }
 
     override fun realize(entity: LivingEntity, data: BuffData) {
-        var attributes = data.handle(this.attributes)
-        if (entity is Player) {
-            attributes = attributes.map { it.replacePlaceholder(entity) }
+        with(data) {
+            val attributes = attributes.handle()
+            if (attrProvider is AttributeSystemHook && attributes is Map<*, *>) {
+                attributes as MutableMap<String, Any>
+                val conditions = conditions.handle()
+                (attrProvider as AttributeSystemHook).addAttribute(entity, getSource(data), attributes, conditions)
+            } else {
+                attributes as List<String>
+                attrProvider.addAttribute(entity, getSource(data), attributes)
+            }
         }
-        attributes = attributes.map { it.placeholder(entity) }
-        attrProvider.addAttribute(entity, getSource(data), attributes)
     }
 
     override fun unrealize(entity: LivingEntity, data: BuffData) {

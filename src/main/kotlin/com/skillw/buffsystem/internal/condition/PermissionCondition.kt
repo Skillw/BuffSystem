@@ -13,9 +13,9 @@ import taboolib.common.platform.function.warning
 
 /**
  * @className PermissionCondition
+ *
  * @author Glom
- * @date 2022/7/18 8:37
- * Copyright  2022 user. All rights reserved.
+ * @date 2022/7/18 8:37 Copyright 2022 user. All rights reserved.
  */
 @AutoRegister
 object PermissionCondition : BuffCondition {
@@ -42,7 +42,7 @@ object PermissionCondition : BuffCondition {
 
     override fun init(entity: LivingEntity, data: BuffData) {
         if (!data.containsKey("permissions")) {
-            warning("The Buff ${data.buffKey} taken effect now has no parma of 'permissions'!")
+            warning("The Buff ${data.buff.key} taken effect now has no parma of 'permissions'!")
         }
     }
 

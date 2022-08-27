@@ -13,9 +13,11 @@ import org.bukkit.entity.LivingEntity
 interface AttributeProvider : Registrable<String> {
 
     fun addAttribute(entity:LivingEntity,key:String,attributes:List<String>)
+
     fun removeAttribute(entity:LivingEntity,key:String)
 
     override fun register() {
         attributeManager.register(this)
     }
+
 }

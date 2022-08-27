@@ -3,7 +3,7 @@ package com.skillw.buffsystem.internal.condition
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.condition.BuffCondition
 import com.skillw.buffsystem.api.data.BuffData
-import com.skillw.buffsystem.internal.clock.Clock.currentTick
+import com.skillw.buffsystem.internal.feature.clock.Clock.currentTick
 import com.skillw.buffsystem.internal.manager.BSConfig
 import com.skillw.buffsystem.internal.manager.BSConfig.enableTimeStatus
 import com.skillw.buffsystem.internal.manager.BSConfig.second
@@ -42,7 +42,7 @@ object TimeCondition : BuffCondition {
 
     override fun init(entity: LivingEntity, data: BuffData) {
         if (!data.containsKey("duration")) {
-            warning("The Buff ${data.buffKey} taken effect now has no parma of 'duration'!")
+            warning("The Buff ${data.buff.key} taken effect now has no parma of 'duration'!")
         }
         val duration = Coerce.toInteger(data.get("duration"))
 

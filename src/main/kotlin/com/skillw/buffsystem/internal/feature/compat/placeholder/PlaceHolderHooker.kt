@@ -1,4 +1,4 @@
-package com.skillw.buffsystem.internal.hook.placeholder
+package com.skillw.buffsystem.internal.feature.compat.placeholder
 
 import com.skillw.pouvoir.Pouvoir
 import org.bukkit.entity.Player

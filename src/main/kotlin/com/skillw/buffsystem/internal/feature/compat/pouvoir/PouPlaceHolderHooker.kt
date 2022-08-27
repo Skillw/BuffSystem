@@ -1,4 +1,4 @@
-package com.skillw.buffsystem.internal.hook.pou
+package com.skillw.buffsystem.internal.feature.compat.pouvoir
 
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.pouvoir.api.annotation.AutoRegister
@@ -18,13 +18,14 @@ object PouPlaceHolderHooker : PouPlaceHolder("bs", BuffSystem) {
             "buffs" -> {
                 return BuffSystem.buffDataManager[uuid]?.keys.toString()
             }
+
             "buff" -> {
                 if (strings.size < 3) return "NULL"
                 val key = strings[1]
                 BuffSystem.buffDataManager[uuid]?.get(key)?.run {
-                    return when(val condition = strings[2]){
+                    return when (val condition = strings[2]) {
                         "name" -> buff?.name?.colored().toString()
-                        else-> buff?.conditions?.get(condition)?.status(entity, this)?.colored() ?: "NULL"
+                        else -> buff?.conditions?.get(condition)?.status(entity, this)?.colored() ?: "NULL"
                     }
                 }
             }
