@@ -1,8 +1,8 @@
-package com.skillw.buffsystem.internal.effect.builder
+package com.skillw.buffsystem.internal.core.effect.builder
 
 import com.skillw.buffsystem.api.effect.BaseEffect
 import com.skillw.buffsystem.api.effect.EffectBuilder
-import com.skillw.buffsystem.internal.effect.PermissionEffect
+import com.skillw.buffsystem.internal.core.effect.PermissionEffect
 import com.skillw.pouvoir.api.annotation.AutoRegister
 
 @AutoRegister

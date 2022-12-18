@@ -8,11 +8,30 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.entity.LivingEntity
 import java.util.*
 
+/**
+ * Base effect
+ *
+ * @constructor Create empty Base effect
+ * @property key
+ */
 abstract class BaseEffect(override val key: String) : Registrable<String>, ConfigurationSerializable {
+    /** 是否来自配置（如果为true会在重载时删掉） */
     var config = false
-    var release = false
 
+    /**
+     * 在实体身上做效果
+     *
+     * @param entity 实体
+     * @param data Buff数据
+     */
     abstract fun realize(entity: LivingEntity, data: BuffData)
+
+    /**
+     * 去除实体身上的效果
+     *
+     * @param entity 实体
+     * @param data Buff数据
+     */
     abstract fun unrealize(entity: LivingEntity, data: BuffData)
 
     abstract override fun hashCode(): Int
@@ -47,7 +66,6 @@ abstract class BaseEffect(override val key: String) : Registrable<String>, Confi
         if (other !is BaseEffect) return false
 
         if (config != other.config) return false
-        if (release != other.release) return false
 
         return true
     }

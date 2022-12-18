@@ -1,4 +1,4 @@
-package com.skillw.buffsystem.internal.feature.compat.mythic
+package com.skillw.buffsystem.internal.feature.compat.mythic.common
 
 import io.lumine.mythic.bukkit.events.MythicMechanicLoadEvent
 import taboolib.common.platform.event.OptionalEvent

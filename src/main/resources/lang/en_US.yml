@@ -2,7 +2,7 @@ prefix: '&d[&9BuffSystem&d] '
 
 command-reload: '&d[&9BuffSystem&d] &aReloaded!'
 command-info:
-  - '&6================================'
+  - '&f&m─&6&m──────────────────────────────────────────────────&6&f&m─'
   - ' &9Command List:'
   - '  &6/buff'
   - '    &d- &ehelp &5—— &aShow help.'
@@ -15,7 +15,7 @@ command-info:
   - '    &d- &einfo (Player) &5—— &aShow Buffs on Player / Entity you look at (Without Player Parameter)'
   - '    &d- &ejson &5—— &aAvailable JSON Parameters'
   - '    &d- &ereload &5—— &aReload the Plugin'
-  - '  &6================================'
+  - '&f&m─&6&m──────────────────────────────────────────────────&6&f&m─'
 command-valid: '&d[&9BuffSystem&d] &cWrong command!'
 command-valid-params: '&d[&9BuffSystem&d] &cData Json Parameters Error!'
 command-valid-player: '&d[&9BuffSystem&d] &cPlayer &6{0} &cdoes not exist!'

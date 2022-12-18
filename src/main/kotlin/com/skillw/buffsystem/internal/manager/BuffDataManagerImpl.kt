@@ -10,7 +10,6 @@ import com.skillw.pouvoir.util.EntityUtils.livingEntity
 import org.bukkit.entity.LivingEntity
 import taboolib.common.platform.function.submit
 import taboolib.common.platform.service.PlatformExecutor
-import java.util.*
 import java.util.function.Consumer
 
 object BuffDataManagerImpl : BuffDataManager() {
@@ -48,58 +47,46 @@ object BuffDataManagerImpl : BuffDataManager() {
     }
 
 
-    override fun giveBuff(entity: LivingEntity, key: String, buff: Buff, consumer: Consumer<BuffData>?) {
-        giveBuff(entity.uniqueId, key, buff, consumer)
-    }
-
-    override fun giveBuff(uuid: UUID, key: String, buff: Buff, consumer: Consumer<BuffData>?) {
-        val buffData = BuffData(key, buff, uuid)
+    override fun giveBuff(entity: LivingEntity, source: String, buff: Buff, consumer: Consumer<BuffData>?) {
+        removeBuff(entity, source)
+        val buffData = BuffData(source, buff, entity)
         buffData.init(consumer)
         buffData.exec()
     }
 
-    override fun giveBuff(uuid: UUID, key: String, buff: Buff, json: String) {
-        removeBuff(uuid, key)
-        giveBuff(uuid, key, buff) { data ->
+    override fun giveBuff(entity: LivingEntity, source: String, buff: Buff, json: String) {
+        giveBuff(entity, source, buff) { data ->
             json.parseToMap().forEach {
                 data[it.key] = it.value
             }
-
         }
     }
 
-    override fun giveBuff(entity: LivingEntity, key: String, buff: Buff, json: String) {
-        giveBuff(entity.uniqueId, key, buff, json)
-    }
-
-    override fun removeBuff(entity: LivingEntity, key: String) {
-        removeBuff(entity.uniqueId, key)
+    override fun removeBuff(entity: LivingEntity, source: String) {
+        this[entity.uniqueId]?.remove(source)
     }
 
     override fun clearBuff(entity: LivingEntity) {
-        clearBuff(entity.uniqueId)
+        this[entity.uniqueId]?.clear()
     }
 
-    override fun removeBuff(uuid: UUID, key: String) {
-        this[uuid]?.remove(key)
-    }
-
-    override fun removeIf(uuid: UUID, json: String) {
+    override fun removeIf(entity: LivingEntity, json: String) {
+        val uuid = entity.uniqueId
         val buffData = BuffSystem.buffDataManager[uuid] ?: return
         val condition = json.parseToMap()
         buffData.filterValues { data -> condition.all { (key, value) -> data[key] == value } }
             .forEach { (key, _) ->
-                removeBuff(uuid, key)
+                removeBuff(entity, key)
             }
     }
 
-    override fun removeIf(entity: LivingEntity, json: String) {
-        removeIf(entity.uniqueId, json)
+    override fun matches(entity: LivingEntity, json: String): Boolean {
+        val uuid = entity.uniqueId
+        val buffData = BuffSystem.buffDataManager[uuid] ?: return false
+        val condition = json.parseToMap()
+        return buffData.values.any { data -> condition.all { (key, value) -> data[key] == value } }
     }
 
-    override fun clearBuff(uuid: UUID) {
-        this[uuid]?.clear()
-    }
 
     override fun onEnable() {
         onReload()

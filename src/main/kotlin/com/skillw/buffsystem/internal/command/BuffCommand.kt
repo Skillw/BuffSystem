@@ -5,7 +5,11 @@ import com.skillw.buffsystem.internal.command.sub.BuffAddCommand
 import com.skillw.buffsystem.internal.command.sub.BuffClearCommand
 import com.skillw.buffsystem.internal.command.sub.BuffInfoCommand
 import com.skillw.buffsystem.internal.command.sub.BuffRemoveCommand
+import com.skillw.pouvoir.util.PlayerUtils.soundClick
+import com.skillw.pouvoir.util.PlayerUtils.soundFail
+import com.skillw.pouvoir.util.PlayerUtils.soundSuccess
 import org.bukkit.command.CommandSender
+import org.bukkit.entity.Player
 import taboolib.common.platform.ProxyCommandSender
 import taboolib.common.platform.command.CommandBody
 import taboolib.common.platform.command.CommandHeader
@@ -17,6 +21,17 @@ import taboolib.platform.util.sendLang
 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
 @CommandHeader(name = "buff", permission = "buff.command")
 object BuffCommand {
+    internal fun ProxyCommandSender.soundSuccess() {
+        (this.origin as? Player?)?.soundSuccess()
+    }
+
+    internal fun ProxyCommandSender.soundFail() {
+        (this.origin as? Player?)?.soundFail()
+    }
+
+    internal fun ProxyCommandSender.soundClick() {
+        (this.origin as? Player?)?.soundClick()
+    }
 
     @CommandBody
     val main = mainCommand {
@@ -24,9 +39,11 @@ object BuffCommand {
             sender.sendLang("command-only-player")
         }
         incorrectCommand { sender, context, index, state ->
+            sender.soundFail()
             sender.sendLang("command-valid")
         }
         execute<ProxyCommandSender> { sender, context, argument ->
+            sender.soundSuccess()
             sender.sendLang("command-info")
         }
 
@@ -34,8 +51,9 @@ object BuffCommand {
 
     @CommandBody(permission = "buff.command.reload")
     val reload = subCommand {
-        execute<CommandSender> { sender, _, _ ->
+        execute<ProxyCommandSender> { sender, _, _ ->
             BuffSystem.reload()
+            sender.soundSuccess()
             sender.sendLang("command-reload")
         }
     }
@@ -44,6 +62,7 @@ object BuffCommand {
     val json = subCommand {
         execute<CommandSender> { sender, _, _ ->
             sender.sendLang("command-json")
+            (sender as? Player)?.soundSuccess()
             sender.sendMessage(*BuffSystem.conditionManager.descriptions().toTypedArray())
         }
     }

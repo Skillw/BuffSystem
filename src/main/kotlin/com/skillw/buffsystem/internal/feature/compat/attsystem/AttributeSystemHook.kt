@@ -11,8 +11,8 @@ import org.bukkit.entity.LivingEntity
 @AutoRegister("com.skillw.attsystem.api.AttrAPI")
 object AttributeSystemHook : AttributeProvider {
     override val key: String = "AttributeSystem"
-    override fun addAttribute(entity: LivingEntity, key: String, attributes: List<String>) {
-        entity.addAttribute(key, attributes, false)
+    override fun addAttribute(entity: LivingEntity, source: String, attributes: List<String>) {
+        entity.addAttribute(source, attributes, false)
     }
 
     private fun MutableMap<String, Any>.removeDeep(path: String) {
@@ -45,7 +45,7 @@ object AttributeSystemHook : AttributeProvider {
         entity.addAttribute(key, attributeData)
     }
 
-    override fun removeAttribute(entity: LivingEntity, key: String) {
-        entity.removeAttribute(key)
+    override fun removeAttribute(entity: LivingEntity, source: String) {
+        entity.removeAttribute(source)
     }
 }

@@ -16,37 +16,37 @@ interface BuffCondition : Registrable<String> {
     val description: String
 
     /**
-     * Status
+     * 条件状态（给玩家看的）
      *
-     * @param entity
-     * @param data
-     * @return
+     * @param entity 实体
+     * @param data buff数据
+     * @return 条件状态
      */// /buff info
     fun status(entity: LivingEntity, data: BuffData): String
 
     /**
-     * Init
+     * 初始化条件
      *
-     * @param entity
-     * @param data
+     * @param entity 实体
+     * @param data buff数据
      */// First buff data init
     fun init(entity: LivingEntity, data: BuffData)
 
     /**
-     * Is deleted
+     * 如果不符合条件，是否删除Buff
      *
-     * @param entity
-     * @param data
-     * @return
+     * @param entity 实体
+     * @param data buff数据
+     * @return 是否删除Buff
      */// Whether delete the buff data or not (depends on previous)
     fun isDeleted(entity: LivingEntity, data: BuffData): Boolean
 
     /**
-     * Test
+     * 测试实体与buff数据是否符合条件
      *
-     * @param entity
-     * @param data
-     * @return
+     * @param entity 实体
+     * @param data buff数据
+     * @return 是否符合条件
      */// The main function, which is used to predicate whether an entity's buff takes effect or not
     fun test(entity: LivingEntity, data: BuffData): Boolean
     override fun register() {

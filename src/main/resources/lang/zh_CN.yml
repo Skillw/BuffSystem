@@ -2,7 +2,7 @@ prefix: '&d[&9BuffSystem&d] '
 
 command-reload: '&d[&9BuffSystem&d] &a插件已重载成功!'
 command-info:
-  - '&6================================'
+  - '&f&m─&d&m──────────────────────────────────────&d&f&m─'
   - ' &9指令列表:'
   - '  &6/buff'
   - '    &d- &ehelp &5—— &a显示帮助.'
@@ -15,7 +15,7 @@ command-info:
   - '    &d- &einfo (玩家名) &5—— &a查看所视实体(不带玩家参数)/玩家 的 Buff信息.'
   - '    &d- &ejson &5—— &a可用参数.'
   - '    &d- &ereload &5—— &a重载插件'
-  - '  &6================================'
+  - '&f&m─&d&m──────────────────────────────────────&d&f&m─'
 command-valid: '&d[&9BuffSystem&d] &c你是不是输错指令啦!'
 command-valid-params: '&d[&9BuffSystem&d] &cData Json 参数错误!'
 command-valid-player: '&d[&9BuffSystem&d] &c玩家 &6{0} &c不存在!'

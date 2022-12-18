@@ -2,7 +2,7 @@ package com.skillw.buffsystem.internal.manager
 
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.manager.ConditionManager
-import com.skillw.buffsystem.internal.condition.ScriptBuffCondition
+import com.skillw.buffsystem.internal.core.condition.ScriptBuffCondition
 import com.skillw.pouvoir.util.FileUtils
 import java.io.File
 

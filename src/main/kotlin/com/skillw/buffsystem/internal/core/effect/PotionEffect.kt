@@ -1,4 +1,4 @@
-package com.skillw.buffsystem.internal.effect
+package com.skillw.buffsystem.internal.core.effect
 
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
@@ -86,7 +86,7 @@ class PotionEffect(key: String, private val potions: List<String>) : BaseEffect(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as com.skillw.buffsystem.internal.effect.PotionEffect
+        other as com.skillw.buffsystem.internal.core.effect.PotionEffect
 
         if (key != other.key) return false
         if (potions != other.potions) return false

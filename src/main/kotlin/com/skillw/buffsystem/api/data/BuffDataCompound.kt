@@ -11,8 +11,7 @@ class BuffDataCompound(
     override val key: UUID,
 ) : Registrable<UUID>, KeyMap<String, BuffData>() {
 
-    val entity
-        get() = key.livingEntity()
+    val entity = key.livingEntity()
 
     fun execAll() {
         forEach {
@@ -57,7 +56,7 @@ class BuffDataCompound(
 
     override fun remove(key: String): BuffData? {
         return super.remove(key)?.also {
-            it.buff?.unrealize(entity ?: return null, it)
+            it.buff.unrealize(entity ?: return null, it)
         }
     }
 

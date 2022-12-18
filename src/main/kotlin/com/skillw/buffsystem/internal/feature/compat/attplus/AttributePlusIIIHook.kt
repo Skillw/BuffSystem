@@ -8,13 +8,13 @@ import org.serverct.ersha.api.AttributeAPI
 @AutoRegister("org.serverct.ersha.api.AttributeAPI")
 object AttributePlusIIIHook : AttributeProvider {
     override val key: String = "AttributePlusIII"
-    override fun addAttribute(entity: LivingEntity, key: String, attributes: List<String>) {
+    override fun addAttribute(entity: LivingEntity, source: String, attributes: List<String>) {
         val data = AttributeAPI.getAttrData(entity)
-        AttributeAPI.addSourceAttribute(data, key, attributes)
+        AttributeAPI.addSourceAttribute(data, source, attributes)
     }
 
-    override fun removeAttribute(entity: LivingEntity, key: String) {
+    override fun removeAttribute(entity: LivingEntity, source: String) {
         val data = AttributeAPI.getAttrData(entity)
-        AttributeAPI.takeSourceAttribute(data, key)
+        AttributeAPI.takeSourceAttribute(data, source)
     }
 }

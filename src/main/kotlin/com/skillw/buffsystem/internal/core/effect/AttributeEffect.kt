@@ -1,5 +1,6 @@
-package com.skillw.buffsystem.internal.effect
+package com.skillw.buffsystem.internal.core.effect
 
+import ac.github.oa.api.OriginAttributeAPI
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
 import com.skillw.buffsystem.api.manager.AttributeManager.attrProvider

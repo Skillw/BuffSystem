@@ -1,4 +1,4 @@
-package com.skillw.buffsystem.internal.condition
+package com.skillw.buffsystem.internal.core.condition
 
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.condition.BuffCondition

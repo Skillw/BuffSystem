@@ -3,9 +3,27 @@ import java.net.URL
 plugins {
     `java-library`
     `maven-publish`
-    id("io.izzel.taboolib") version "1.41"
+    id("io.izzel.taboolib") version "1.51"
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
     id("org.jetbrains.dokka") version "1.6.10"
+}
+
+val code: String? by project
+task("versionPlus") {
+    val file = file("version.properties")
+    val properties = org.jetbrains.kotlin.konan.properties.loadProperties(file.path)
+    var subVersion = properties.getProperty("subVersion").toString().toInt()
+    if (code == null) {
+        properties["subVersion"] = (++subVersion).toString()
+        properties.store(file.outputStream(), null)
+    }
+    project.version = project.version.toString() + "-$subVersion"
+}
+
+task("buildCode") {
+    if (code == null) return@task
+    val origin = project.version.toString()
+    project.version = "$origin-code"
 }
 tasks.dokkaJavadoc.configure {
     outputDirectory.set(File("C:\\Users\\Administrator\\Desktop\\Doc\\buffsystem"))
@@ -18,7 +36,9 @@ tasks.dokkaJavadoc.configure {
     }
 }
 taboolib {
-//    options("skip-kotlin-relocate")
+    if (project.version.toString().contains("-code")) {
+        options("skip-kotlin-relocate")
+    }
 
     description {
         contributors {
@@ -27,21 +47,23 @@ taboolib {
         dependencies {
             name("AttributeSystem").optional(true)
             name("SX-Attribute").optional(true)
-            name("OriginAttribute").optional(true)
             name("AttributePlus").optional(true)
+            name("OriginAttribute").optional(true)
             name("Pouvoir")
         }
     }
     install("module-configuration")
     install("module-lang")
-    install("module-chat")
     install("platform-bukkit")
+    install("module-chat")
+    install("module-nms")
+    install("module-nms-util")
     install("common")
     install("module-metrics")
     install("common-5")
 
     classifier = null
-    version = "6.0.9-72"
+    version = "6.0.10-31"
 }
 
 repositories {

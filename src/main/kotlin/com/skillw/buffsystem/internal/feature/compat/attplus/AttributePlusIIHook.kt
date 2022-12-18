@@ -8,11 +8,11 @@ import org.serverct.ersha.jd.api.EntityAttributeAPI
 @AutoRegister("org.serverct.ersha.jd.api.EntityAttributeAPI")
 object AttributePlusIIHook : AttributeProvider {
     override val key: String = "AttributePlusII"
-    override fun addAttribute(entity: LivingEntity, key: String, attributes: List<String>) {
-        EntityAttributeAPI.addEntityAttribute(entity, key, attributes)
+    override fun addAttribute(entity: LivingEntity, source: String, attributes: List<String>) {
+        EntityAttributeAPI.addEntityAttribute(entity, source, attributes)
     }
 
-    override fun removeAttribute(entity: LivingEntity, key: String) {
-        EntityAttributeAPI.removeEntityAttribute(entity, key)
+    override fun removeAttribute(entity: LivingEntity, source: String) {
+        EntityAttributeAPI.removeEntityAttribute(entity, source)
     }
 }

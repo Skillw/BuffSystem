@@ -1,4 +1,4 @@
-package com.skillw.buffsystem.internal.effect
+package com.skillw.buffsystem.internal.core.effect
 
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
@@ -14,15 +14,9 @@ import java.util.*
 
 class PermissionEffect(key: String, val permissions: List<String>) : BaseEffect(key),
     ConfigurationSerializable {
-
-    init {
-        release = true
-    }
-
     override fun realize(entity: LivingEntity, data: BuffData) {
         if (entity !is Player) return
-        val player = entity
-        val uuid = player.uniqueId
+        val uuid = entity.uniqueId
         val permissionStr = data.run { permissions.handle().map { it.toString() } }
         permissionMap[uuid]?.clear()
         unrealize(entity, data)
@@ -31,12 +25,12 @@ class PermissionEffect(key: String, val permissions: List<String>) : BaseEffect(
             val permission = array[0]
             val has = Coerce.toBoolean(array[1])
             VaultService.permission?.let {
-                originPermMap.put(uuid, permission, it.playerHas(player, permission))
+                originPermMap.put(uuid, permission, it.playerHas(entity, permission))
                 submit {
                     if (has) {
-                        it.playerAddTransient(player, permission)
+                        it.playerAddTransient(entity, permission)
                     } else {
-                        it.playerRemoveTransient(player, permission)
+                        it.playerRemoveTransient(entity, permission)
                     }
                 }
             }

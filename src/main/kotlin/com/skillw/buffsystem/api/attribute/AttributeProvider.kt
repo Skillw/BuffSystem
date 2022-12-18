@@ -6,15 +6,28 @@ import org.bukkit.entity.LivingEntity
 
 /**
  * @className AttributeProvider
+ *
  * @author Glom
- * @date 2022/8/6 19:34
- * Copyright  2022 user. All rights reserved.
+ * @date 2022/8/6 19:34 Copyright 2022 user. All rights reserved.
  */
 interface AttributeProvider : Registrable<String> {
 
-    fun addAttribute(entity:LivingEntity,key:String,attributes:List<String>)
+    /**
+     * 给属性
+     *
+     * @param entity 实体
+     * @param source 属性源
+     * @param attributes 属性
+     */
+    fun addAttribute(entity: LivingEntity, source: String, attributes: List<String>)
 
-    fun removeAttribute(entity:LivingEntity,key:String)
+    /**
+     * 删属性
+     *
+     * @param entity 实体
+     * @param source 属性源
+     */
+    fun removeAttribute(entity: LivingEntity, source: String)
 
     override fun register() {
         attributeManager.register(this)
