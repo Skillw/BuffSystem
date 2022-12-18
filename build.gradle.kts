@@ -9,11 +9,21 @@ plugins {
 }
 
 val code: String? by project
+task("versionPlus") {
+    val file = file("version.properties")
+    val properties = org.jetbrains.kotlin.konan.properties.loadProperties(file.path)
+    var subVersion = properties.getProperty("subVersion").toString().toInt()
+    if (code == null) {
+        properties["subVersion"] = (++subVersion).toString()
+        properties.store(file.outputStream(), null)
+    }
+    project.version = project.version.toString() + "-$subVersion"
+}
 
 task("buildCode") {
     if (code == null) return@task
     val origin = project.version.toString()
-    project.version = "$origin-code"
+    project.version = "$origin-api"
 }
 tasks.dokkaJavadoc.configure {
     outputDirectory.set(File("C:\\Users\\Administrator\\Desktop\\Doc\\buffsystem"))
@@ -26,7 +36,7 @@ tasks.dokkaJavadoc.configure {
     }
 }
 taboolib {
-    if (project.version.toString().contains("-code")) {
+    if (project.version.toString().contains("-api")) {
         options("skip-kotlin-relocate")
     }
 
