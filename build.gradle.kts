@@ -9,16 +9,6 @@ plugins {
 }
 
 val code: String? by project
-task("versionPlus") {
-    val file = file("version.properties")
-    val properties = org.jetbrains.kotlin.konan.properties.loadProperties(file.path)
-    var subVersion = properties.getProperty("subVersion").toString().toInt()
-    if (code == null) {
-        properties["subVersion"] = (++subVersion).toString()
-        properties.store(file.outputStream(), null)
-    }
-    project.version = project.version.toString() + "-$subVersion"
-}
 
 task("buildCode") {
     if (code == null) return@task
