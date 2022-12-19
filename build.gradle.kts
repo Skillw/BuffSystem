@@ -8,23 +8,7 @@ plugins {
     id("org.jetbrains.dokka") version "1.6.10"
 }
 
-val code: String? by project
-task("versionPlus") {
-    val file = file("version.properties")
-    val properties = org.jetbrains.kotlin.konan.properties.loadProperties(file.path)
-    var subVersion = properties.getProperty("subVersion").toString().toInt()
-    if (code == null) {
-        properties["subVersion"] = (++subVersion).toString()
-        properties.store(file.outputStream(), null)
-    }
-    project.version = project.version.toString() + "-$subVersion"
-}
 
-task("buildCode") {
-    if (code == null) return@task
-    val origin = project.version.toString()
-    project.version = "$origin-api"
-}
 tasks.dokkaJavadoc.configure {
     outputDirectory.set(File("C:\\Users\\Administrator\\Desktop\\Doc\\buffsystem"))
     dokkaSourceSets {
@@ -35,6 +19,29 @@ tasks.dokkaJavadoc.configure {
         }
     }
 }
+val api: String? by project
+val order: String? by project
+
+task("versionModify") {
+    project.version = project.version.toString() + (order?.let { "-$it" } ?: "")
+}
+
+task("versionAddAPI") {
+    if (api == null) return@task
+    val origin = project.version.toString()
+    project.version = "$origin-api"
+}
+
+
+task("releaseName") {
+    println(project.name + "-" + project.version)
+}
+
+task("version") {
+    println(project.version.toString())
+}
+
+
 taboolib {
     if (project.version.toString().contains("-api")) {
         options("skip-kotlin-relocate")
