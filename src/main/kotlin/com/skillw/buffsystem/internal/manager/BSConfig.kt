@@ -1,8 +1,10 @@
 package com.skillw.buffsystem.internal.manager
 
 import com.skillw.buffsystem.BuffSystem
+import com.skillw.buffsystem.api.BuffAPI
 import com.skillw.pouvoir.Pouvoir
 import com.skillw.pouvoir.api.manager.ConfigManager
+import com.skillw.pouvoir.util.ClassUtils.static
 import taboolib.common.platform.Platform
 import taboolib.common.platform.function.getDataFolder
 import taboolib.common5.Coerce
@@ -28,6 +30,7 @@ object BSConfig : ConfigManager(BuffSystem) {
                 BuffSystem.buffManager.size
             })
         }
+        Pouvoir.scriptEngineManager.globalVariables["BuffAPI"] = BuffAPI::class.java.static()
     }
 
 

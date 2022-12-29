@@ -3,7 +3,7 @@ package com.skillw.buffsystem.api
 import com.skillw.buffsystem.BuffSystem.buffDataManager
 import com.skillw.buffsystem.api.buff.Buff
 import com.skillw.buffsystem.api.data.BuffData
-import com.skillw.pouvoir.api.annotation.ScriptTopLevel
+
 import org.bukkit.entity.LivingEntity
 import java.util.function.Consumer
 
@@ -17,7 +17,6 @@ object BuffAPI {
      * @receiver LivingEntity
      */
     @JvmStatic
-    @ScriptTopLevel
     fun LivingEntity.hasBuff(source: String): Boolean {
         return buffDataManager[uniqueId]?.containsKey(source) == true
     }
@@ -31,7 +30,6 @@ object BuffAPI {
      * @receiver LivingEntity
      */
     @JvmStatic
-    @ScriptTopLevel
     fun LivingEntity.giveBuff(source: String, buff: Buff, consumer: Consumer<BuffData>? = null) {
         buffDataManager.giveBuff(this, source, buff, consumer)
     }
@@ -45,7 +43,6 @@ object BuffAPI {
      * @receiver LivingEntity
      */
     @JvmStatic
-    @ScriptTopLevel
     fun LivingEntity.giveBuff(source: String, buff: Buff, json: String) {
         buffDataManager.giveBuff(this, source, buff, json)
     }
@@ -56,7 +53,6 @@ object BuffAPI {
      * @receiver LivingEntity
      */
     @JvmStatic
-    @ScriptTopLevel
     fun LivingEntity.clearBuff() {
         buffDataManager.clearBuff(this)
     }
@@ -68,7 +64,6 @@ object BuffAPI {
      * @receiver LivingEntity
      */
     @JvmStatic
-    @ScriptTopLevel
     fun LivingEntity.removeBuff(source: String) {
         buffDataManager.removeBuff(this, source)
     }
@@ -81,7 +76,6 @@ object BuffAPI {
      * @receiver LivingEntity
      */
     @JvmStatic
-    @ScriptTopLevel
     fun LivingEntity.removeBuffIf(json: String) {
         buffDataManager.removeIf(this, json)
     }

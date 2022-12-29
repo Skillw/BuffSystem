@@ -38,7 +38,7 @@ object BuffRemoveCommand {
             }
             dynamic {
                 suggestion<ProxyCommandSender>(uncheck = true) { sender, context ->
-                    sender.soundFail()
+                    sender.soundClick()
                     BuffSystem.buffDataManager[Bukkit.getPlayer(context.argument(-1))?.uniqueId
                         ?: return@suggestion emptyList<String>()]?.map {
                         it.key

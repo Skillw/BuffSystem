@@ -49,7 +49,7 @@ object BuffAddCommand {
                 onlinePlayers().map { it.name }
             }
             dynamic {
-                suggestion<ProxyCommandSender> { sender, _ ->
+                suggestion<ProxyCommandSender>(uncheck = true) { sender, _ ->
                     sender.soundClick()
                     listOf("key")
                 }
@@ -80,7 +80,7 @@ object BuffAddCommand {
 
     val addEntity = subCommand {
         dynamic {
-            suggestion<ProxyCommandSender> { sender, _ ->
+            suggestion<ProxyCommandSender>(uncheck = true) { sender, _ ->
                 sender.soundClick()
                 listOf("key")
             }
