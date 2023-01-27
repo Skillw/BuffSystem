@@ -87,8 +87,8 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
 }
 dependencies {
     dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.7.20")
-    compileOnly("ink.ptms.core:v11800:11800-minimize:api")
     compileOnly("ink.ptms.core:v11800:11800-minimize:mapped")
+    compileOnly("ink.ptms.core:v11800:11800-minimize:api")
     compileOnly("com.google.code.gson:gson:2.9.0")
     compileOnly("io.lumine:Mythic-Dist:5.0.3")
     compileOnly(kotlin("stdlib"))

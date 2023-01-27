@@ -2,7 +2,7 @@ package com.skillw.buffsystem.api.buff
 
 import com.skillw.asahi.api.AsahiManager
 import com.skillw.asahi.api.member.context.AsahiContext
-import com.skillw.asahi.api.member.namespace.Namespace
+import com.skillw.asahi.api.member.namespace.NamespaceContainer
 import com.skillw.asahi.api.member.namespace.NamespaceHolder
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.data.BuffData
@@ -29,9 +29,8 @@ abstract class Buff(override val key: String, val display: String, vararg namesp
     var period = 10L
     var async = true
     var config = false
-    override val namespaces = HashSet<Namespace>().apply {
-        add(AsahiManager.getNamespace("buff"))
-        addAll(AsahiManager.getNamespaces(*namespaces))
+    override val namespaces = NamespaceContainer().apply {
+        addNamespaces(AsahiManager.getNamespace("buff"))
     }
 
     protected abstract fun BuffData.genDescription(entity: LivingEntity): List<String>
@@ -75,7 +74,6 @@ abstract class Buff(override val key: String, val display: String, vararg namesp
 
 
     override fun register() {
-        AsahiManager.loadSharedNamespace(this)
         BuffSystem.buffManager[key] = this
     }
 
