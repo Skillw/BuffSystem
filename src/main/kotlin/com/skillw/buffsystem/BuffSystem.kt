@@ -2,9 +2,9 @@ package com.skillw.buffsystem
 
 import com.skillw.buffsystem.api.manager.*
 import com.skillw.buffsystem.internal.manager.BSConfig
-import com.skillw.pouvoir.api.annotation.PouManager
 import com.skillw.pouvoir.api.manager.ManagerData
 import com.skillw.pouvoir.api.plugin.SubPouvoir
+import com.skillw.pouvoir.api.plugin.annotation.PouManager
 import org.bukkit.plugin.java.JavaPlugin
 import taboolib.common.platform.Plugin
 import taboolib.module.configuration.Config
@@ -31,18 +31,6 @@ object BuffSystem : Plugin(), SubPouvoir {
     @JvmStatic
     @PouManager
     lateinit var configManager: BSConfig
-
-    @JvmStatic
-    @PouManager
-    lateinit var conditionManager: ConditionManager
-
-    @JvmStatic
-    @PouManager
-    lateinit var effectBuilderManager: EffectBuilderManager
-
-    @JvmStatic
-    @PouManager
-    lateinit var effectManager: EffectManager
 
     @JvmStatic
     @PouManager

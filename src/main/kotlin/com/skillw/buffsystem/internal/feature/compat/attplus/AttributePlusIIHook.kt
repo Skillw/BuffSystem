@@ -1,7 +1,7 @@
 package com.skillw.buffsystem.internal.feature.compat.attplus
 
 import com.skillw.buffsystem.api.attribute.AttributeProvider
-import com.skillw.pouvoir.api.annotation.AutoRegister
+import com.skillw.pouvoir.api.plugin.annotation.AutoRegister
 import org.bukkit.entity.LivingEntity
 import org.serverct.ersha.jd.api.EntityAttributeAPI
 

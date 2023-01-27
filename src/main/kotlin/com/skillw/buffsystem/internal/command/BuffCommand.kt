@@ -5,10 +5,9 @@ import com.skillw.buffsystem.internal.command.sub.BuffAddCommand
 import com.skillw.buffsystem.internal.command.sub.BuffClearCommand
 import com.skillw.buffsystem.internal.command.sub.BuffInfoCommand
 import com.skillw.buffsystem.internal.command.sub.BuffRemoveCommand
-import com.skillw.pouvoir.util.PlayerUtils.soundClick
-import com.skillw.pouvoir.util.PlayerUtils.soundFail
-import com.skillw.pouvoir.util.PlayerUtils.soundSuccess
-import org.bukkit.command.CommandSender
+import com.skillw.pouvoir.util.soundClick
+import com.skillw.pouvoir.util.soundFail
+import com.skillw.pouvoir.util.soundSuccess
 import org.bukkit.entity.Player
 import taboolib.common.platform.ProxyCommandSender
 import taboolib.common.platform.command.CommandBody
@@ -16,7 +15,6 @@ import taboolib.common.platform.command.CommandHeader
 import taboolib.common.platform.command.mainCommand
 import taboolib.common.platform.command.subCommand
 import taboolib.module.lang.sendLang
-import taboolib.platform.util.sendLang
 
 @Suppress("UNUSED_ANONYMOUS_PARAMETER")
 @CommandHeader(name = "buff", permission = "buff.command")
@@ -55,15 +53,6 @@ object BuffCommand {
             BuffSystem.reload()
             sender.soundSuccess()
             sender.sendLang("command-reload")
-        }
-    }
-
-    @CommandBody(permission = "buff.command.json")
-    val json = subCommand {
-        execute<CommandSender> { sender, _, _ ->
-            sender.sendLang("command-json")
-            (sender as? Player)?.soundSuccess()
-            sender.sendMessage(*BuffSystem.conditionManager.descriptions().toTypedArray())
         }
     }
 

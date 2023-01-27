@@ -4,8 +4,8 @@ plugins {
     `java-library`
     `maven-publish`
     id("io.izzel.taboolib") version "1.51"
-    id("org.jetbrains.kotlin.jvm") version "1.6.10"
-    id("org.jetbrains.dokka") version "1.6.10"
+    id("org.jetbrains.kotlin.jvm") version "1.7.20"
+    id("org.jetbrains.dokka") version "1.7.20"
 }
 
 
@@ -44,7 +44,7 @@ task("version") {
 
 taboolib {
     if (project.version.toString().contains("-api")) {
-        options("skip-kotlin-relocate")
+        options("skip-kotlin-relocate", "keep-kotlin-module")
     }
 
     description {
@@ -70,7 +70,7 @@ taboolib {
     install("common-5")
 
     classifier = null
-    version = "6.0.10-31"
+    version = "6.0.10-71"
 }
 
 repositories {
@@ -86,14 +86,13 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     }
 }
 dependencies {
-    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.6.10")
-    compileOnly("ink.ptms:nms-all:1.0.0")
-    compileOnly("ink.ptms.core:v11800:11800-minimize:mapped")
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.7.20")
     compileOnly("ink.ptms.core:v11800:11800-minimize:api")
-    compileOnly(kotlin("stdlib"))
-    compileOnly(fileTree("libs"))
+    compileOnly("ink.ptms.core:v11800:11800-minimize:mapped")
     compileOnly("com.google.code.gson:gson:2.9.0")
     compileOnly("io.lumine:Mythic-Dist:5.0.3")
+    compileOnly(kotlin("stdlib"))
+    compileOnly(fileTree("libs"))
 
 }
 

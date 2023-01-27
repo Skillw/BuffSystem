@@ -1,8 +1,8 @@
 package com.skillw.buffsystem.internal.feature.compat.pouvoir
 
 import com.skillw.buffsystem.BuffSystem
-import com.skillw.pouvoir.api.annotation.AutoRegister
-import com.skillw.pouvoir.api.placeholder.PouPlaceHolder
+import com.skillw.pouvoir.api.feature.placeholder.PouPlaceHolder
+import com.skillw.pouvoir.api.plugin.annotation.AutoRegister
 import org.bukkit.entity.LivingEntity
 import taboolib.module.chat.colored
 
@@ -23,9 +23,12 @@ object PouPlaceHolderHooker : PouPlaceHolder("bs", BuffSystem) {
                 if (strings.size < 3) return "NULL"
                 val key = strings[1]
                 BuffSystem.buffDataManager[uuid]?.get(key)?.run {
-                    return when (val condition = strings[2]) {
-                        "name" -> buff?.name?.colored().toString()
-                        else -> buff?.conditions?.get(condition)?.status(entity, this)?.colored() ?: "NULL"
+                    buff ?: return@run "NULL"
+                    if (strings.size >= 3) {
+                        if (strings[2] == "name") buff!!.display.colored()
+                        else "NULL"
+                    } else {
+                        buff!!.description(this, entity)
                     }
                 }
             }

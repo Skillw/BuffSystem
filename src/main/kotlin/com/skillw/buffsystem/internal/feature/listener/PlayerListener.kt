@@ -33,12 +33,12 @@ object PlayerListener {
         val player = event.player
         val uuid = player.uniqueId
         val name = player.name
-        val buffDataCompound = BuffSystem.buffDataManager[uuid] ?: return
-        buffDataCompound.unrealize()
+        val dataCompound = BuffSystem.buffDataManager[uuid] ?: return
+        dataCompound.clear()
         player.activePotionEffects.forEach {
             player.removePotionEffect(it.type)
         }
-        BuffContainer[name, "buff-data"] = buffDataCompound.serialize()
+        BuffContainer[name, "buff-data"] = dataCompound.serialize()
         BuffSystem.buffDataManager.remove(uuid)
     }
 

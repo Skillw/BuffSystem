@@ -2,25 +2,33 @@ package com.skillw.buffsystem.api.data
 
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.util.GsonUtils.parseToMap
-import com.skillw.pouvoir.api.able.Registrable
-import com.skillw.pouvoir.api.map.KeyMap
-import com.skillw.pouvoir.util.EntityUtils.livingEntity
+import com.skillw.pouvoir.api.plugin.map.KeyMap
+import com.skillw.pouvoir.api.plugin.map.component.Registrable
+import com.skillw.pouvoir.util.livingEntity
 import java.util.*
 
 class BuffDataCompound(
     override val key: UUID,
 ) : Registrable<UUID>, KeyMap<String, BuffData>() {
+    val entity by lazy { key.livingEntity() }
 
-    val entity = key.livingEntity()
+    override fun register(key: String, value: BuffData) {
+        value.startTask()
+        super.register(key, value)
+    }
 
-    fun execAll() {
-        forEach {
-            if (!BuffSystem.buffManager.containsKey(it.value.buff.key)) {
-                this.remove(it.key)
-                return@forEach
-            }
-            it.value.exec()
-        }
+    override fun clear() {
+        values.forEach(BuffData::cancelTask)
+        super.clear()
+    }
+
+    override fun remove(key: String): BuffData? {
+        get(key)?.cancelTask()
+        return super.remove(key)
+    }
+
+    override fun register() {
+        BuffSystem.buffDataManager.register(this)
     }
 
     companion object {
@@ -46,27 +54,15 @@ class BuffDataCompound(
             if (index != keys.size - 1) builder.append(", ")
         }
         builder.append("}")
-
         return builder.toString()
     }
 
-    override fun register() {
-        BuffSystem.buffDataManager[key] = this
-    }
-
-    override fun remove(key: String): BuffData? {
-        return super.remove(key)?.also {
-            it.buff.unrealize(entity ?: return null, it)
-        }
-    }
-
-    override fun clear() {
-        this.keys.forEach { remove(it) }
-    }
-
     fun unrealize() {
-        this.values.forEach {
-            it.unrealize()
-        }
+        values.forEach(BuffData::cancelTask)
     }
+
+    fun realize() {
+        values.forEach(BuffData::startTask)
+    }
+
 }

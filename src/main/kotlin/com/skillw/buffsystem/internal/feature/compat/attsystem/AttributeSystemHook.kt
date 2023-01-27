@@ -3,9 +3,10 @@ package com.skillw.buffsystem.internal.feature.compat.attsystem
 import com.skillw.attsystem.AttributeSystem
 import com.skillw.attsystem.api.AttrAPI.addAttribute
 import com.skillw.attsystem.api.AttrAPI.removeAttribute
+import com.skillw.attsystem.api.AttrAPI.updateAttr
 import com.skillw.attsystem.api.attribute.compound.AttributeData
 import com.skillw.buffsystem.api.attribute.AttributeProvider
-import com.skillw.pouvoir.api.annotation.AutoRegister
+import com.skillw.pouvoir.api.plugin.annotation.AutoRegister
 import org.bukkit.entity.LivingEntity
 
 @AutoRegister("com.skillw.attsystem.api.AttrAPI")
@@ -13,6 +14,7 @@ object AttributeSystemHook : AttributeProvider {
     override val key: String = "AttributeSystem"
     override fun addAttribute(entity: LivingEntity, source: String, attributes: List<String>) {
         entity.addAttribute(source, attributes, false)
+        entity.updateAttr()
     }
 
     private fun MutableMap<String, Any>.removeDeep(path: String) {
@@ -43,9 +45,11 @@ object AttributeSystemHook : AttributeProvider {
         }
         val attributeData = AttributeData.fromMap(attributes)
         entity.addAttribute(key, attributeData)
+        entity.updateAttr()
     }
 
     override fun removeAttribute(entity: LivingEntity, source: String) {
         entity.removeAttribute(source)
+        entity.updateAttr()
     }
 }

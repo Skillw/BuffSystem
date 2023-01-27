@@ -1,5 +1,5 @@
 database:
-  enable: false
+  type: sqlite
   host: localhost
   port: 3306
   user: root
@@ -11,21 +11,3 @@ options:
   #tick
   update-time: 10
   clear-time: 1200
-conditions:
-  permission:
-    description: 'permissions = [cmi.command, perm.test, ...]'
-    status:
-      enable: true
-      format: '权限: [{each}]'
-      each: '{permission} : {bool}'
-      separator: ', '
-  time:
-    description: 'duration = duration ticks'
-    status:
-      enable: true
-      format: '剩余时间: {remainder}'
-      # second or tick
-      mode: second
-      second: 's'
-      tick: '刻'
-      unlimited: '无限'
