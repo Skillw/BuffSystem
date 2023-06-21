@@ -70,7 +70,7 @@ taboolib {
     install("common-5")
 
     classifier = null
-    version = "6.0.10-71"
+    version = "6.0.11-13"
 }
 
 repositories {

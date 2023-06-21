@@ -1,0 +1,85 @@
+example-riyan:
+  name: "&7示例Buff - &4日炎"
+  description: |-
+    inline all [
+      ''
+      '&4日炎效果'
+      '&e每秒对周围&b5格&e的实体造成&65点&e伤害，并附加&c火焰效果'
+      ''
+      '&e持续时间: &c${data.continueSecond}s'
+    ]
+  period: 10
+  namespaces: [ common, lang, bukkit ]
+  context:
+    default:
+      duration: "200"
+  when:
+    - if: |-
+        set duration to if has duration then &duration else &default.duration
+        set continueSecond ifndef to math &duration / 20
+        set tillTick ifndef to math currentTick + &duration
+        print currentTick
+        print &tillTick
+        check currentTick <= &tillTick
+      goto: main
+    - else: release
+  functions:
+    main: |-
+      print '&7示例Buff - &4日炎&e生效中..'
+      targets [
+        selector &entity [ @range 5 ]
+        filter &entity [ @!self ]
+      ]
+      inSync {
+        targets eachLiving (it) => {
+          print &it
+          damage &it 10 
+          &it fireTicks to 20
+        }
+      }
+    release: |-
+      print '&7示例Buff - &4日炎&e失效了'
+      removeBuff
+
+example-att:
+  name: "&7示例Buff - &b迅捷"
+  description: |-
+    inline all [
+      ''
+      '&b迅捷效果 Lv.$level'
+      when of &level {
+        case == 1 -> '&7获得&c$base_value&7点移速'
+        case >= 2 -> '&7基础移速加成&c$base_value&7点, 另外每秒加速&c$perSec&7点移速'
+        else -> 'NONE'
+      }
+      ''
+      '&e持续时间: &c${data.continueSecond}s'
+    ]
+  period: 20
+  namespaces: [ common, lang, bukkit ]
+  context:
+    default:
+      level: "1"
+      duration: "200"
+    continueSecond: "math &duration / 20"
+    perSec: "if check &level >= 2 then math &level * 10 else 0"
+    base_value: "300"
+  when:
+    - if: |-
+        set level to format if has level then &level else &default.level '#'
+        set duration to if has duration then &duration else &default.duration
+        set tillTick ifndef to math currentTick + &duration
+        check currentTick <= &tillTick
+      goto: main
+    - else: release
+  functions:
+    main: |-
+      print '&7示例Buff - &b迅捷&e生效中..'
+      set data.add_value ifndef to &base_value
+      set add_value to math $perSec + $data.add_value
+      set data.add_value to $add_value
+      buff-att add 'buff-迅捷' inline all [ '移动速度: $add_value' ] to &entity
+    release: |-
+      print '&7示例Buff - &b迅捷&e失效了'
+      buff-att remove 'buff-迅捷' to &entity
+      removeBuff
