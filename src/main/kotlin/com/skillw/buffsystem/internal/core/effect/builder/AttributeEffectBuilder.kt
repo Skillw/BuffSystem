@@ -11,7 +11,7 @@ object AttributeEffectBuilder : EffectBuilder("attribute") {
         return AttributeEffect(
             key,
             map["attributes"] ?: map["attribute"] ?: return null,
-            map["conditions"] as? MutableMap<String, Any>? ?: emptyMap()
+            map["conditions"] as? List<Any>? ?: emptyList()
         )
     }
 

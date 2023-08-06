@@ -33,9 +33,9 @@ open class Buff(override val key: String, val name: String) : Registrable<String
     }
 
     fun isDeleted(entity: LivingEntity, data: BuffData): Boolean =
-        conditions.map.toList()[0].second.isDeleted(entity, data)
+        conditions.toList()[0].second.isDeleted(entity, data)
 
-    open fun test(entity: LivingEntity, data: BuffData): Boolean = conditions.map.all { it.value.test(entity, data) }
+    open fun test(entity: LivingEntity, data: BuffData): Boolean = conditions.all { it.value.test(entity, data) }
 
     fun takeEffect(entity: LivingEntity, data: BuffData) {
         if (test(entity, data)) {

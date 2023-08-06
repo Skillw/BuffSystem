@@ -3,7 +3,7 @@ import java.net.URL
 plugins {
     `java-library`
     `maven-publish`
-    id("io.izzel.taboolib") version "1.51"
+    id("io.izzel.taboolib") version "1.56"
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
     id("org.jetbrains.dokka") version "1.6.10"
 }
@@ -60,17 +60,17 @@ taboolib {
         }
     }
     install("module-configuration")
-    install("module-lang")
     install("platform-bukkit")
+    install("module-lang")
     install("module-chat")
-    install("module-nms")
     install("module-nms-util")
-    install("common")
+    install("module-nms")
     install("module-metrics")
+    install("common")
     install("common-5")
 
     classifier = null
-    version = "6.0.10-31"
+    version = "6.0.11-31"
 }
 
 repositories {

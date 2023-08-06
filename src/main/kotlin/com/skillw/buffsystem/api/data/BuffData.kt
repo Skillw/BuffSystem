@@ -104,7 +104,7 @@ class BuffData(
         if (get("save").toString() == "false") {
             return ""
         }
-        return map.encodeJson()
+        return encodeJson()
     }
 
     /**

@@ -14,8 +14,13 @@ example:
       attributes:
         "{name}":
           value: "{value}"
+      conditions:
+        - conditions:
+            - key: food
+              value: 10
+          paths: [ "" ]
     - type: attribute
-      attribute:
+      attributes:
         - "防御力: 100"
 
     - type: permission

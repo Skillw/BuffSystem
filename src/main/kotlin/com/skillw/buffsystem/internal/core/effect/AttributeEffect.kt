@@ -1,6 +1,5 @@
 package com.skillw.buffsystem.internal.core.effect
 
-import ac.github.oa.api.OriginAttributeAPI
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
 import com.skillw.buffsystem.api.manager.AttributeManager.attrProvider
@@ -8,10 +7,9 @@ import com.skillw.buffsystem.internal.feature.compat.attsystem.AttributeSystemHo
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.entity.LivingEntity
 
-class AttributeEffect(key: String, val attributes: Any, val conditions: Map<String, Any> = emptyMap()) :
+class AttributeEffect(key: String, val attributes: Any, val conditions: Collection<Any> = emptyList()) :
     BaseEffect(key),
     ConfigurationSerializable {
-
 
     private fun getSource(data: BuffData): String {
         return "attribute-effect-$key-source-${data.key}}"
@@ -22,7 +20,7 @@ class AttributeEffect(key: String, val attributes: Any, val conditions: Map<Stri
             val attributes = attributes.handle()
             if (attrProvider is AttributeSystemHook && attributes is Map<*, *>) {
                 attributes as MutableMap<String, Any>
-                val conditions = conditions.handle()
+                val conditions = conditions.handle() as Collection<Any>
                 (attrProvider as AttributeSystemHook).addAttribute(entity, getSource(data), attributes, conditions)
             } else {
                 attributes as List<String>

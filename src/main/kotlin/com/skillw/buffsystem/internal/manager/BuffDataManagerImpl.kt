@@ -33,15 +33,13 @@ object BuffDataManagerImpl : BuffDataManager() {
     private fun clearTask() {
         task?.cancel()
         task = submit(period = BSConfig.dataClearSchedule) {
-            try {
+            runCatching {
                 keys.forEach {
-                    val livingEntity = it.livingEntity()
-                    if (livingEntity?.isValid != true || it.livingEntity()?.isDead != false) {
+                    val entity = it.livingEntity()
+                    if (entity == null || !entity.isValid || entity.isDead) {
                         remove(it)
                     }
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
         }
     }
@@ -103,11 +101,13 @@ object BuffDataManagerImpl : BuffDataManager() {
     }
 
     override fun onDisable() {
-        forEach { (_, compound) ->
-            compound.unrealize()
-            BuffContainer[compound.entity?.name.toString(), "buff-data"] = compound.serialize()
-            BuffSystem.buffDataManager.remove(compound.key)
-        }
+        runCatching {
+            forEach { (_, compound) ->
+                compound.unrealize()
+                BuffContainer[compound.entity?.name.toString(), "buff-data"] = compound.serialize()
+                BuffSystem.buffDataManager.remove(compound.key)
+            }
 
+        }
     }
 }
