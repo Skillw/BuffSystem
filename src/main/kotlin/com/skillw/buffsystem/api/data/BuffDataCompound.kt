@@ -12,9 +12,9 @@ class BuffDataCompound(
 ) : Registrable<UUID>, KeyMap<String, BuffData>() {
     val entity by lazy { key.livingEntity() }
 
-    override fun register(key: String, value: BuffData) {
+    override fun register(key: String, value: BuffData): BuffData? {
         value.startTask()
-        super.register(key, value)
+        return super.register(key, value)
     }
 
     override fun clear() {

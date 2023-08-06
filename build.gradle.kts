@@ -3,7 +3,7 @@ import java.net.URL
 plugins {
     `java-library`
     `maven-publish`
-    id("io.izzel.taboolib") version "1.51"
+    id("io.izzel.taboolib") version "1.56"
     id("org.jetbrains.kotlin.jvm") version "1.7.20"
     id("org.jetbrains.dokka") version "1.7.20"
 }
@@ -21,6 +21,7 @@ tasks.dokkaJavadoc.configure {
 }
 val api: String? by project
 val order: String? by project
+val noMod: String? by project
 
 task("versionModify") {
     project.version = project.version.toString() + (order?.let { "-$it" } ?: "")
@@ -30,8 +31,9 @@ task("versionAddAPI") {
     if (api == null) return@task
     val origin = project.version.toString()
     project.version = "$origin-api"
+    if (noMod == null) return@task
+    project.version = "${project.version}-no-ktmod"
 }
-
 
 task("releaseName") {
     println(project.name + "-" + project.version)
@@ -45,6 +47,9 @@ task("version") {
 taboolib {
     if (project.version.toString().contains("-api")) {
         options("skip-kotlin-relocate", "keep-kotlin-module")
+    }
+    if (project.version.toString().contains("-no-ktmod")) {
+        options.remove("keep-kotlin-module")
     }
 
     description {
@@ -70,7 +75,7 @@ taboolib {
     install("common-5")
 
     classifier = null
-    version = "6.0.11-13"
+    version = "6.0.11-31"
 }
 
 repositories {

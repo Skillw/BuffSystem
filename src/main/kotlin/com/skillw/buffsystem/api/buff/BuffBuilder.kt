@@ -119,7 +119,8 @@ class BuffBuilder(
 
             override fun BuffData.release(entity: LivingEntity) {
                 this["data"] = this
-                invokers["release"]?.invoke(this)
+                if (this["removing"]?.cbool != true)
+                    invokers["release"]?.invoke(this)
             }
 
             override fun BuffData.genDescription(entity: LivingEntity): List<String> {

@@ -52,7 +52,8 @@ private fun removeBuff() = prefixParser {
         data.task?.cancel()
         data.task = null
         data.exit()
-        buffDataManager[data.entity.uniqueId]?.map?.remove(data.key)
+        data["removing"] = true
+        buffDataManager[data.entity.uniqueId]?.remove(data.key)
     }
 }
 
