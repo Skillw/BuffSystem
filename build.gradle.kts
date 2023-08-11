@@ -3,54 +3,42 @@ import java.net.URL
 plugins {
     `java-library`
     `maven-publish`
+    signing
     id("io.izzel.taboolib") version "1.56"
     id("org.jetbrains.kotlin.jvm") version "1.7.20"
     id("org.jetbrains.dokka") version "1.7.20"
+    id("io.codearte.nexus-staging") version "0.30.0"
 }
 
-
 tasks.dokkaJavadoc.configure {
-    outputDirectory.set(File("C:\\Users\\Administrator\\Desktop\\Doc\\buffsystem"))
+    suppressInheritedMembers.set(true)
+    suppressObviousFunctions.set(false)
     dokkaSourceSets {
         configureEach {
             externalDocumentationLink {
                 url.set(URL("https://doc.skillw.com/pouvoir/"))
             }
+            externalDocumentationLink {
+                url.set(URL("https://doc.skillw.com/attsystem/"))
+            }
+            externalDocumentationLink {
+                url.set(URL("https://docs.oracle.com/javase/8/docs/api/"))
+            }
+            externalDocumentationLink {
+                url.set(URL("https://doc.skillw.com/bukkit/"))
+            }
         }
     }
 }
-val api: String? by project
+
 val order: String? by project
-val noMod: String? by project
 
-task("versionModify") {
-    project.version = project.version.toString() + (order?.let { "-$it" } ?: "")
-}
-
-task("versionAddAPI") {
-    if (api == null) return@task
-    val origin = project.version.toString()
-    project.version = "$origin-api"
-    if (noMod == null) return@task
-    project.version = "${project.version}-no-ktmod"
-}
-
-task("releaseName") {
+task("info") {
     println(project.name + "-" + project.version)
-}
-
-task("version") {
     println(project.version.toString())
 }
-
-
 taboolib {
-    if (project.version.toString().contains("-api")) {
-        options("skip-kotlin-relocate", "keep-kotlin-module")
-    }
-    if (project.version.toString().contains("-no-ktmod")) {
-        options.remove("keep-kotlin-module")
-    }
+    project.version = project.version.toString() + (order?.let { "-$it" } ?: "")
 
     description {
         contributors {
@@ -110,23 +98,93 @@ configure<JavaPluginConvention> {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+tasks.register<Jar>("buildAPIJar") {
+    dependsOn(tasks.compileJava, tasks.compileKotlin)
+    from(tasks.compileJava, tasks.compileKotlin)
+    includeEmptyDirs = false
+    include { it.isDirectory or it.name.endsWith(".class") or it.name.endsWith(".kotlin_module") }
+    archiveClassifier.set("api")
+}
+
+tasks.register<Jar>("buildJavadocJar") {
+    dependsOn(tasks.dokkaJavadoc)
+    from(tasks.dokkaJavadoc.flatMap { it.outputDirectory })
+    archiveClassifier.set("javadoc")
+}
+
+tasks.register<Jar>("buildSourcesJar") {
+    dependsOn(JavaPlugin.CLASSES_TASK_NAME)
+    archiveClassifier.set("sources")
+    from(sourceSets["main"].allSource)
+}
+
+
 publishing {
     repositories {
         maven {
-            url = uri("https://repo.tabooproject.org/repository/releases")
+            url = if (project.version.toString().contains("-SNAPSHOT")) {
+                uri("https://s01.oss.sonatype.org/content/repositories/snapshots")
+            } else {
+                uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            }
             credentials {
-                password = project.findProperty("taboolibPassword").toString()
-                username = project.findProperty("taboolibUsername").toString()
+                username = project.findProperty("username").toString()
+                password = project.findProperty("password").toString()
             }
             authentication {
                 create<BasicAuthentication>("basic")
+
             }
         }
+        mavenLocal()
     }
     publications {
         create<MavenPublication>("library") {
-            from(components["java"])
+            artifact(tasks["buildAPIJar"]) { classifier = classifier?.replace("-api", "") }
+            artifact(tasks["buildJavadocJar"])
+            artifact(tasks["buildSourcesJar"])
+            version = project.version.toString()
             groupId = project.group.toString()
+            pom {
+                name.set(project.name)
+                description.set("Bukkit Buff Engine Plugin.")
+                url.set("https://github.com/Glom-c/BuffSystem/")
+
+                dependencies {
+                    compileOnly("com.skillw.pouvoir:Pouvoir:1.6.4-8")
+                    compileOnly("com.skillw.attributesystem:AttributeSystem:2.1.0-beta-2")
+                }
+
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://github.com/Glom-c/BuffSystem/blob/main/LICENSE")
+                    }
+                }
+                developers {
+                    developer {
+                        id.set("Skillw")
+                        name.set("Glom_")
+                        email.set("glom@skillw.com")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git:https://github.com/Glom-c/BuffSystem.git")
+                    developerConnection.set("scm:git:ssh:https://github.com/Glom-c/BuffSystem.git")
+                    url.set("https://github.com/Glom-c/BuffSystem.git")
+                }
+            }
         }
     }
+}
+
+nexusStaging {
+    serverUrl = "https://s01.oss.sonatype.org/service/local/"
+    username = project.findProperty("username").toString()
+    password = project.findProperty("password").toString()
+    packageGroup = "com.skillw"
+}
+
+signing {
+    sign(publishing.publications.getAt("library"))
 }
