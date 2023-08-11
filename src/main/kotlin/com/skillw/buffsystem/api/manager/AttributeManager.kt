@@ -3,8 +3,8 @@ package com.skillw.buffsystem.api.manager
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.attribute.AttributeProvider
 import com.skillw.pouvoir.api.manager.Manager
-import com.skillw.pouvoir.api.map.LowerKeyMap
 import com.skillw.pouvoir.api.plugin.SubPouvoir
+import com.skillw.pouvoir.api.plugin.map.LowerKeyMap
 import taboolib.common.util.unsafeLazy
 
 object AttributeManager : Manager, LowerKeyMap<AttributeProvider>() {

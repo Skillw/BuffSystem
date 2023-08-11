@@ -5,9 +5,9 @@ import com.skillw.buffsystem.internal.command.sub.BuffAddCommand
 import com.skillw.buffsystem.internal.command.sub.BuffClearCommand
 import com.skillw.buffsystem.internal.command.sub.BuffInfoCommand
 import com.skillw.buffsystem.internal.command.sub.BuffRemoveCommand
-import com.skillw.pouvoir.util.PlayerUtils.soundClick
-import com.skillw.pouvoir.util.PlayerUtils.soundFail
-import com.skillw.pouvoir.util.PlayerUtils.soundSuccess
+import com.skillw.pouvoir.util.soundClick
+import com.skillw.pouvoir.util.soundFail
+import com.skillw.pouvoir.util.soundSuccess
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import taboolib.common.platform.ProxyCommandSender

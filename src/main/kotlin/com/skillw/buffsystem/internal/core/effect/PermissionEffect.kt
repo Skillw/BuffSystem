@@ -2,8 +2,8 @@ package com.skillw.buffsystem.internal.core.effect
 
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
-import com.skillw.pouvoir.api.map.BaseMap
-import com.skillw.pouvoir.util.MapUtils.put
+import com.skillw.pouvoir.api.plugin.map.BaseMap
+import com.skillw.pouvoir.util.put
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player

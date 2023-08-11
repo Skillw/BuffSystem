@@ -3,7 +3,7 @@ package com.skillw.buffsystem.api.manager
 import com.skillw.buffsystem.api.effect.BaseEffect
 import com.skillw.buffsystem.api.effect.EffectBuilder
 import com.skillw.pouvoir.api.manager.Manager
-import com.skillw.pouvoir.api.map.LowerKeyMap
+import com.skillw.pouvoir.api.plugin.map.LowerKeyMap
 
 /**
  * Effect builder manager

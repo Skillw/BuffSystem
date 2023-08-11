@@ -6,7 +6,7 @@ import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.manager.BuffDataManager
 import com.skillw.buffsystem.internal.feature.compat.pouvoir.container.BuffContainer
 import com.skillw.buffsystem.util.GsonUtils.parseToMap
-import com.skillw.pouvoir.util.EntityUtils.livingEntity
+import com.skillw.pouvoir.util.livingEntity
 import org.bukkit.entity.LivingEntity
 import taboolib.common.platform.function.submit
 import taboolib.common.platform.service.PlatformExecutor

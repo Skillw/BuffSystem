@@ -5,11 +5,11 @@ import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
 import com.skillw.buffsystem.api.effect.EffectBuilder
 import com.skillw.pouvoir.Pouvoir
-import com.skillw.pouvoir.api.annotation.AutoRegister
+import com.skillw.pouvoir.api.plugin.annotation.AutoRegister
 import com.skillw.pouvoir.api.script.annotation.ScriptAnnotation
 import com.skillw.pouvoir.api.script.annotation.ScriptAnnotationData
 import com.skillw.pouvoir.internal.manager.PouConfig
-import com.skillw.pouvoir.util.StringUtils.toArgs
+import com.skillw.pouvoir.util.toArgs
 import org.bukkit.entity.LivingEntity
 import taboolib.common.platform.function.console
 import taboolib.module.lang.sendLang

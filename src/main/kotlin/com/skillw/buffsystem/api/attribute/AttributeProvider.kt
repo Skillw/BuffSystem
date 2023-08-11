@@ -1,7 +1,7 @@
 package com.skillw.buffsystem.api.attribute
 
 import com.skillw.buffsystem.BuffSystem.attributeManager
-import com.skillw.pouvoir.api.able.Registrable
+import com.skillw.pouvoir.api.plugin.map.component.Registrable
 import org.bukkit.entity.LivingEntity
 
 /**

@@ -2,8 +2,8 @@ package com.skillw.buffsystem.internal.manager
 
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.manager.EffectManager
-import com.skillw.pouvoir.util.FileUtils.loadYamls
-import com.skillw.pouvoir.util.FileUtils.toMap
+import com.skillw.pouvoir.util.loadYamls
+import com.skillw.pouvoir.util.toMap
 import java.io.File
 
 object EffectManagerImpl : EffectManager() {

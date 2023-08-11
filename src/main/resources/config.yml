@@ -1,4 +1,5 @@
 database:
+  type: sqlite
   enable: false
   host: localhost
   port: 3306
@@ -6,6 +7,8 @@ database:
   password: root
   database: root
   table: my_database
+  #每10分钟同步一次
+  user-container-sync-time: 360000
 options:
   debug: false
   #tick

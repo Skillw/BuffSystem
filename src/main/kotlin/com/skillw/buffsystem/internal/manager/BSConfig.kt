@@ -4,7 +4,9 @@ import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.BuffAPI
 import com.skillw.pouvoir.Pouvoir
 import com.skillw.pouvoir.api.manager.ConfigManager
-import com.skillw.pouvoir.util.ClassUtils.static
+import com.skillw.pouvoir.api.plugin.map.DataMap
+import com.skillw.pouvoir.util.static
+import com.skillw.pouvoir.util.toMap
 import taboolib.common.platform.Platform
 import taboolib.common.platform.function.getDataFolder
 import taboolib.common5.Coerce
@@ -16,6 +18,8 @@ import java.io.File
 
 object BSConfig : ConfigManager(BuffSystem) {
     override val priority = 0
+    val databaseConfig: DataMap
+        get() = DataMap().also { it.putAll(this["config"].getConfigurationSection("database")!!.toMap()) }
 
     override fun onLoad() {
         createIfNotExists("buffs", "example.yml")

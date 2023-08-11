@@ -1,43 +1,44 @@
 package com.skillw.buffsystem.internal.feature.compat.pouvoir.functions
 
+import com.skillw.asahi.api.annotation.AsahiPrefix
+import com.skillw.asahi.api.member.quest.Quester
+import com.skillw.asahi.api.prefixParser
+import com.skillw.asahi.api.quest
+import com.skillw.asahi.api.quester
 import com.skillw.buffsystem.internal.feature.compat.mythic.BuffHandler.handle
-import com.skillw.pouvoir.api.annotation.AutoRegister
-import com.skillw.pouvoir.api.function.PouFunction
-import com.skillw.pouvoir.api.function.parser.Parser
 import org.bukkit.entity.LivingEntity
 
-@AutoRegister
-object FunctionBuff : PouFunction<Any>("buff") {
-    override fun execute(parser: Parser): Any {
-        with(parser) {
-            val entity = parse<LivingEntity>()
-            val type = parseString()
-            var key = ""
-            var buffKey = ""
-            var json = ""
-            val data = HashMap<String, Any>()
-            when (type) {
-                "add" -> {
-                    key = parseString()
-                    buffKey = parseString()
-                    if (except("with")) {
-                        data.putAll(parseMap())
-                    }
-                }
 
-                "remove" -> {
-                    key = parseString()
-                }
-
-                "removeIf" -> {
-                    json = parseString()
-                }
-
-                "matches" -> {
-                    json = parseString()
-                }
+@AsahiPrefix(["buff"], "common")
+fun buff() = prefixParser<Boolean> {
+    val entity = quest<LivingEntity>()
+    val type = next()
+    var key: Quester<String> = quester { "" }
+    var buffKey: Quester<String> = quester { "" }
+    var json: Quester<String> = quester { "" }
+    var data: Quester<Map<String, Any>> = quester { emptyMap() }
+    when (type) {
+        "add" -> {
+            key = quest()
+            buffKey = quest()
+            if (expect("with")) {
+                data = quest()
             }
-            return entity.handle(type, key, buffKey, json, data)
         }
+
+        "remove" -> {
+            key = quest()
+        }
+
+        "removeIf" -> {
+            json = quest()
+        }
+
+        "matches" -> {
+            json = quest()
+        }
+    }
+    result {
+        entity.get().handle(type, key.get(), buffKey.get(), json.get(), data.get())
     }
 }

@@ -3,7 +3,7 @@ package com.skillw.buffsystem.api.effect
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.BuffSystem.effectManager
 import com.skillw.buffsystem.api.data.BuffData
-import com.skillw.pouvoir.api.able.Registrable
+import com.skillw.pouvoir.api.plugin.map.component.Registrable
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.entity.LivingEntity
 import java.util.*

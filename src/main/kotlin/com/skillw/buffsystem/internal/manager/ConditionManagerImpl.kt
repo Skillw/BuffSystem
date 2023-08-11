@@ -3,7 +3,7 @@ package com.skillw.buffsystem.internal.manager
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.manager.ConditionManager
 import com.skillw.buffsystem.internal.core.condition.ScriptBuffCondition
-import com.skillw.pouvoir.util.FileUtils
+import com.skillw.pouvoir.util.loadMultiply
 import java.io.File
 
 object ConditionManagerImpl : ConditionManager() {
@@ -25,7 +25,7 @@ object ConditionManagerImpl : ConditionManager() {
             .forEach {
                 removeByValue(it.value)
             }
-        FileUtils.loadMultiply(File(BuffSystem.plugin.dataFolder, "conditions"), ScriptBuffCondition::class.java)
+        loadMultiply(File(BuffSystem.plugin.dataFolder, "conditions"), ScriptBuffCondition::class.java)
             .forEach {
                 it.key.register()
             }

@@ -4,7 +4,7 @@ import com.skillw.attsystem.AttributeSystem
 import com.skillw.attsystem.api.AttrAPI.addCompiledData
 import com.skillw.attsystem.api.AttrAPI.removeCompiledData
 import com.skillw.buffsystem.api.attribute.AttributeProvider
-import com.skillw.pouvoir.api.annotation.AutoRegister
+import com.skillw.pouvoir.api.plugin.annotation.AutoRegister
 import org.bukkit.entity.LivingEntity
 
 @AutoRegister("com.skillw.attsystem.api.AttrAPI")

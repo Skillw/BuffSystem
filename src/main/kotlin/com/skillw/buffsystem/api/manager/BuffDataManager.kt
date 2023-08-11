@@ -4,7 +4,7 @@ import com.skillw.buffsystem.api.buff.Buff
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.data.BuffDataCompound
 import com.skillw.pouvoir.api.manager.Manager
-import com.skillw.pouvoir.api.map.KeyMap
+import com.skillw.pouvoir.api.plugin.map.KeyMap
 import org.bukkit.entity.LivingEntity
 import java.util.*
 import java.util.function.Consumer

@@ -3,8 +3,8 @@ package com.skillw.buffsystem.internal.command.sub
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.internal.command.BuffCommand.soundClick
 import com.skillw.buffsystem.internal.command.BuffCommand.soundFail
-import com.skillw.pouvoir.util.EntityUtils.getEntityRayHit
-import com.skillw.pouvoir.util.PlayerUtils.soundFail
+import com.skillw.pouvoir.util.getEntityRayHit
+import com.skillw.pouvoir.util.soundFail
 import org.bukkit.Bukkit
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
@@ -37,7 +37,7 @@ object BuffClearCommand {
         }
         execute<ProxyPlayer> { sender, _, _ ->
             val player = sender.cast<Player>()
-            val entity = player.getEntityRayHit(10.0)
+            val entity = player.getEntityRayHit(10.0) as? LivingEntity?
             if (entity == null) {
                 player.soundFail()
                 sender.sendLang("command-valid-entity")

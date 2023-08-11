@@ -3,7 +3,7 @@ package com.skillw.buffsystem.internal.core.condition
 import com.skillw.buffsystem.api.condition.BuffCondition
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.pouvoir.Pouvoir
-import com.skillw.pouvoir.internal.core.script.common.PouCompiledScript
+import com.skillw.pouvoir.api.script.PouFileCompiledScript
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.entity.LivingEntity
 
@@ -15,7 +15,7 @@ import org.bukkit.entity.LivingEntity
  */
 class ScriptBuffCondition(
     override val key: String,
-    private val script: PouCompiledScript,
+    private val script: PouFileCompiledScript,
     override val description: String = "",
 ) : BuffCondition, ConfigurationSerializable {
     override fun status(entity: LivingEntity, data: BuffData): String {

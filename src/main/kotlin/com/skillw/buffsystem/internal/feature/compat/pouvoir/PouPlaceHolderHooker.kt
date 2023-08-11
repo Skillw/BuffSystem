@@ -1,8 +1,8 @@
 package com.skillw.buffsystem.internal.feature.compat.pouvoir
 
 import com.skillw.buffsystem.BuffSystem
-import com.skillw.pouvoir.api.annotation.AutoRegister
-import com.skillw.pouvoir.api.placeholder.PouPlaceHolder
+import com.skillw.pouvoir.api.feature.placeholder.PouPlaceHolder
+import com.skillw.pouvoir.api.plugin.annotation.AutoRegister
 import org.bukkit.entity.LivingEntity
 import taboolib.module.chat.colored
 

@@ -2,9 +2,9 @@ package com.skillw.buffsystem.api.data
 
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.util.GsonUtils.parseToMap
-import com.skillw.pouvoir.api.able.Registrable
-import com.skillw.pouvoir.api.map.KeyMap
-import com.skillw.pouvoir.util.EntityUtils.livingEntity
+import com.skillw.pouvoir.api.plugin.map.KeyMap
+import com.skillw.pouvoir.api.plugin.map.component.Registrable
+import com.skillw.pouvoir.util.livingEntity
 import java.util.*
 
 class BuffDataCompound(

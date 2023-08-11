@@ -22,6 +22,6 @@ object Clock {
 
     @Awake(LifeCycle.DISABLE)
     fun disable() {
-        BuffContainer["BUFF", "CLOCK_TICKS"] = currentTick
+        BuffContainer["BUFF", "CLOCK_TICKS"] = currentTick.toString()
     }
 }

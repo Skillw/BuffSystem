@@ -3,7 +3,7 @@ package com.skillw.buffsystem.internal.core.effect.builder
 import com.skillw.buffsystem.api.effect.BaseEffect
 import com.skillw.buffsystem.api.effect.EffectBuilder
 import com.skillw.buffsystem.internal.core.effect.PermissionEffect
-import com.skillw.pouvoir.api.annotation.AutoRegister
+import com.skillw.pouvoir.api.plugin.annotation.AutoRegister
 
 @AutoRegister
 object PermissionEffectBuilder : EffectBuilder("permission") {

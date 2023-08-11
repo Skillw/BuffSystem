@@ -2,7 +2,7 @@ package com.skillw.buffsystem.api.condition
 
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.data.BuffData
-import com.skillw.pouvoir.api.able.Registrable
+import com.skillw.pouvoir.api.plugin.map.component.Registrable
 import org.bukkit.entity.LivingEntity
 
 /**

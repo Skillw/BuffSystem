@@ -2,7 +2,7 @@ package com.skillw.buffsystem.internal.feature.compat.originatt
 
 import ac.github.oa.api.OriginAttributeAPI
 import com.skillw.buffsystem.api.attribute.AttributeProvider
-import com.skillw.pouvoir.api.annotation.AutoRegister
+import com.skillw.pouvoir.api.plugin.annotation.AutoRegister
 import org.bukkit.entity.LivingEntity
 
 @AutoRegister("ac.github.oa.api.OriginAttributeAPI")

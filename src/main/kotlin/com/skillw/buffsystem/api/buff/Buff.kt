@@ -4,9 +4,9 @@ import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.api.condition.BuffCondition
 import com.skillw.buffsystem.api.data.BuffData
 import com.skillw.buffsystem.api.effect.BaseEffect
-import com.skillw.pouvoir.api.able.Registrable
-import com.skillw.pouvoir.api.map.LinkedKeyMap
-import com.skillw.pouvoir.util.FileUtils.toMap
+import com.skillw.pouvoir.api.plugin.map.LinkedKeyMap
+import com.skillw.pouvoir.api.plugin.map.component.Registrable
+import com.skillw.pouvoir.util.toMap
 import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.serialization.ConfigurationSerializable
 import org.bukkit.entity.LivingEntity

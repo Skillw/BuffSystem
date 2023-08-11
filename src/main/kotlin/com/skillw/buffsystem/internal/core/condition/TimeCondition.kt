@@ -10,8 +10,8 @@ import com.skillw.buffsystem.internal.manager.BSConfig.second
 import com.skillw.buffsystem.internal.manager.BSConfig.timeMode
 import com.skillw.buffsystem.internal.manager.BSConfig.timeStatusFormat
 import com.skillw.buffsystem.internal.manager.BSConfig.unlimited
-import com.skillw.pouvoir.api.annotation.AutoRegister
-import com.skillw.pouvoir.util.NumberUtils.format
+import com.skillw.pouvoir.api.plugin.annotation.AutoRegister
+import com.skillw.pouvoir.util.format
 import org.bukkit.entity.LivingEntity
 import taboolib.common.platform.function.warning
 import taboolib.common5.Coerce

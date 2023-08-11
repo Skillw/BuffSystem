@@ -2,11 +2,11 @@ package com.skillw.buffsystem.internal.feature.compat.pouvoir.annotation
 
 import com.skillw.attsystem.AttributeSystem
 import com.skillw.buffsystem.internal.core.condition.ScriptBuffCondition
-import com.skillw.pouvoir.api.annotation.AutoRegister
+import com.skillw.pouvoir.api.plugin.annotation.AutoRegister
 import com.skillw.pouvoir.api.script.annotation.ScriptAnnotation
 import com.skillw.pouvoir.api.script.annotation.ScriptAnnotationData
 import com.skillw.pouvoir.internal.manager.PouConfig
-import com.skillw.pouvoir.util.StringUtils.toArgs
+import com.skillw.pouvoir.util.toArgs
 import taboolib.common.platform.function.console
 import taboolib.module.lang.sendLang
 

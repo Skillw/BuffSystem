@@ -1,7 +1,7 @@
 package com.skillw.buffsystem.api.effect
 
 import com.skillw.buffsystem.BuffSystem
-import com.skillw.pouvoir.api.able.Registrable
+import com.skillw.pouvoir.api.plugin.map.component.Registrable
 
 /**
  * @className EffectBuilder

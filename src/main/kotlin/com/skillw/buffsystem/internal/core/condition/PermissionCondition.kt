@@ -7,7 +7,7 @@ import com.skillw.buffsystem.internal.manager.BSConfig.enablePermStatus
 import com.skillw.buffsystem.internal.manager.BSConfig.permEachFormat
 import com.skillw.buffsystem.internal.manager.BSConfig.permSeparator
 import com.skillw.buffsystem.internal.manager.BSConfig.permStatusFormat
-import com.skillw.pouvoir.api.annotation.AutoRegister
+import com.skillw.pouvoir.api.plugin.annotation.AutoRegister
 import org.bukkit.entity.LivingEntity
 import taboolib.common.platform.function.warning
 

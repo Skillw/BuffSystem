@@ -1,16 +1,16 @@
 package com.skillw.buffsystem.api.data
 
 
+import com.skillw.asahi.api.AsahiAPI.analysis
+import com.skillw.asahi.api.member.context.AsahiContext
 import com.skillw.buffsystem.BuffSystem
 import com.skillw.buffsystem.BuffSystem.buffManager
 import com.skillw.buffsystem.api.buff.Buff
 import com.skillw.buffsystem.util.GsonUtils.parseToMap
-import com.skillw.pouvoir.api.PouvoirAPI.analysis
-import com.skillw.pouvoir.api.able.Keyable
-import com.skillw.pouvoir.api.map.BaseMap
-import com.skillw.pouvoir.internal.core.function.context.SimpleContext
-import com.skillw.pouvoir.util.EntityUtils.livingEntity
-import com.skillw.pouvoir.util.GsonUtils.encodeJson
+import com.skillw.pouvoir.api.plugin.map.BaseMap
+import com.skillw.pouvoir.api.plugin.map.component.Keyable
+import com.skillw.pouvoir.util.encodeJson
+import com.skillw.pouvoir.util.livingEntity
 import org.bukkit.entity.LivingEntity
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
@@ -30,7 +30,7 @@ class BuffData(
     val entity: LivingEntity,
 ) : Keyable<String>, BaseMap<String, Any>() {
 
-    private val context = SimpleContext(ConcurrentHashMap())
+    private val context = AsahiContext.create(ConcurrentHashMap())
 
     init {
         this["buffKey"] = buff.key
@@ -38,7 +38,7 @@ class BuffData(
     }
 
     /** buff数据的UUID */
-    val uniqueId = UUID.randomUUID()
+    val uniqueId: UUID = UUID.randomUUID()
 
     /** 实体的uuid */
     val uuid = entity.uniqueId
