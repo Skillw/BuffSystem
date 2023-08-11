@@ -1,0 +1,42 @@
+$dokka.format:javadoc-v1
+$dokka.linkExtension:html
+$dokka.location:com.skillw.buffsystem.api.buff/Buff.Companion///PointingToDeclaration/com/skillw/buffsystem/api/buff/Buff.Companion.html
+$dokka.location:com.skillw.buffsystem.api.data/BuffData.Companion///PointingToDeclaration/com/skillw/buffsystem/api/data/BuffData.Companion.html
+$dokka.location:com.skillw.buffsystem.api.data/BuffDataCompound.Companion///PointingToDeclaration/com/skillw/buffsystem/api/data/BuffDataCompound.Companion.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Condition.Post///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Condition.Post.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Condition.Pre///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Condition.Pre.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Condition///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Condition.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Description.Post///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Description.Post.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Description.Pre///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Description.Pre.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Description///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Description.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Realize.Post///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Realize.Post.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Realize.Pre///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Realize.Pre.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Realize///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Realize.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Release.Post///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Release.Post.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Release.Pre///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Release.Pre.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Release///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Release.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Tick.Post///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Tick.Post.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Tick.Pre///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Tick.Pre.html
+$dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Tick///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Tick.html
+com.skillw.buffsystem
+com.skillw.buffsystem.api
+com.skillw.buffsystem.api.attribute
+com.skillw.buffsystem.api.buff
+com.skillw.buffsystem.api.data
+com.skillw.buffsystem.api.event
+com.skillw.buffsystem.api.manager
+com.skillw.buffsystem.internal.command
+com.skillw.buffsystem.internal.command.sub
+com.skillw.buffsystem.internal.feature.compat.attplus
+com.skillw.buffsystem.internal.feature.compat.attsystem
+com.skillw.buffsystem.internal.feature.compat.mythic
+com.skillw.buffsystem.internal.feature.compat.mythic.common
+com.skillw.buffsystem.internal.feature.compat.mythic.legacy
+com.skillw.buffsystem.internal.feature.compat.originatt
+com.skillw.buffsystem.internal.feature.compat.placeholder
+com.skillw.buffsystem.internal.feature.compat.pouvoir
+com.skillw.buffsystem.internal.feature.compat.pouvoir.container
+com.skillw.buffsystem.internal.feature.listener
+com.skillw.buffsystem.internal.manager
+com.skillw.buffsystem.util
+
