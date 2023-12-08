@@ -35,10 +35,10 @@
 
 ## Links
 
-**WIKI** [http://blog.skillw.com/#sort=buffsystem&doc=README.md](http://blog.skillw.com/#sort=buffsystem&doc=README.md)
+**WIKI** [https://www.skillw.com/docs/buffsystem/intro](https://www.skillw.com/docs/buffsystem/intro)
 
 **更新记录
-** [http://blog.skillw.com/#sort=buffsystem&doc=UPDATE.md](http://blog.skillw.com/#sort=buffsystem&doc=UPDATE.md)
+** [https://www.skillw.com/docs/buffsystem/updates](https://www.skillw.com/docs/buffsystem/updates)
 
 **JavaDoc** [https://doc.skillw.com/buffsystem/](https://doc.skillw.com/buffsystem/)
 
