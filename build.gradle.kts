@@ -11,8 +11,8 @@ plugins {
 }
 
 tasks.dokkaJavadoc.configure {
-    suppressInheritedMembers.set(true)
     suppressObviousFunctions.set(false)
+    suppressInheritedMembers.set(true)
     dokkaSourceSets {
         configureEach {
             externalDocumentationLink {
