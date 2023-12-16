@@ -13,7 +13,7 @@ import org.bukkit.entity.LivingEntity
 
 
 @AsahiPrefix(["buff"])
-private fun buff() = prefixParser {
+private fun buff() = prefixParser<Any> {
     val type = next()
     var key = quester { "" }
     var buffKey = quester { "" }
@@ -45,7 +45,7 @@ private fun buff() = prefixParser {
 
 
 @AsahiPrefix(["removeBuff"], namespace = "buff")
-private fun removeBuff() = prefixParser {
+private fun removeBuff() = prefixParser<Any> {
     result {
         if (reloading) return@result
         val data = get("data") as? BuffData ?: return@result
@@ -58,7 +58,7 @@ private fun removeBuff() = prefixParser {
 }
 
 @AsahiPrefix(["buff-att"], namespace = "buff")
-private fun buffAttr() = prefixParser {
+private fun buffAttr() = prefixParser<Any> {
     when (val type = next()) {
         "add" -> {
             val source = quest<String>()
