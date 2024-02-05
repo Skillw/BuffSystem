@@ -12,6 +12,8 @@
 | 硬依赖  | Pouvoir                                                                    |
 | 软依赖  | Mythicmobs AttributeSystem/AttributePlus/OriginAttribute/SX-Attribute(四选一) |
 
+![GitHub Release](https://img.shields.io/github/v/release/Skillw/BuffSystem)
+
 ## 介绍
 
 **BuffSystem** 是基于 **TabooLib VI** & **Pouvoir** 编写的一款多线程效果插件
