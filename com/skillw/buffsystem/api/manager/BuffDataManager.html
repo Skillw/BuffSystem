@@ -7,8 +7,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../stylesheet.css" title="Style">
     <link rel="stylesheet" type="text/css" href="../../../../../dokka-javadoc-stylesheet.css" title="Style">
     <link rel="stylesheet" type="text/css" href="../../../../../jquery/jquery-ui.css" title="Style">
-    <script type="text/javascript" src="../../../../../jquery/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="../../../../../jquery/jquery-migrate-3.0.1.js"></script>
+    <script type="text/javascript" src="../../../../../jquery/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="../../../../../jquery/jquery-migrate-3.4.0.min.js"></script>
     <script type="text/javascript" src="../../../../../jquery/jquery-ui.js"></script>
 
     <script type="text/javascript" src="../../../../../search.js"></script>
@@ -88,7 +88,7 @@ var pathtoroot = "../../../../../";
 
 <main role="main">
     <div class="header">
-        <div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html"></a></div>
+        <div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">com.skillw.buffsystem.api.manager</a></div>
         <h2 title="Class BuffDataManager" class="title">Class BuffDataManager</h2>
     </div>
     <div class="contentContainer">
@@ -161,6 +161,14 @@ public abstract class <span class="typeNameLabel"><a href=BuffDataManager.html>B
 extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map/KeyMap.html>KeyMap</a>&lt;<a href=https://docs.oracle.com/javase/8/docs/api/java/util/UUID.html>UUID</a>, <a href=../data/BuffDataCompound.html>BuffDataCompound</a>&gt; implements <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/manager/Manager.html>Manager</a>
                     </pre>
                     <div class="block"><p>Buff data manager</p></div>
+
+                    <dl>
+
+                    
+
+                    
+
+                    </dl>
                 </li>
             </ul>
         </div>
@@ -289,7 +297,7 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                         <tr id="i0" class="altColor">
                                             <td class="colFirst"><code>abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a></code>
                                             </td>
-                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#giveBuff(LivingEntity,String,Buff,Consumer)>giveBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source, <a href=../buff/Buff.html>Buff</a> buff, <a href=https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html>Consumer</a>&lt;<a href=../data/BuffData.html>BuffData</a>&gt; consumer) </code>
+                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#giveBuff(org.bukkit.entity.LivingEntity,java.lang.String,com.skillw.buffsystem.api.buff.Buff,java.util.function.Consumer)>giveBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source, <a href=../buff/Buff.html>Buff</a> buff, <a href=https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html>Consumer</a>&lt;<a href=../data/BuffData.html>BuffData</a>&gt; consumer) </code>
                                             </th>
                                             <td class="colLast">给Buff</td>
                                         </tr>
@@ -297,7 +305,7 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                         <tr id="i1" class="rowColor">
                                             <td class="colFirst"><code>abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a></code>
                                             </td>
-                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#giveBuff(LivingEntity,String,Buff,String)>giveBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source, <a href=../buff/Buff.html>Buff</a> buff, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json) </code>
+                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#giveBuff(org.bukkit.entity.LivingEntity,java.lang.String,com.skillw.buffsystem.api.buff.Buff,java.lang.String)>giveBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source, <a href=../buff/Buff.html>Buff</a> buff, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json) </code>
                                             </th>
                                             <td class="colLast">给Buff</td>
                                         </tr>
@@ -305,7 +313,7 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                         <tr id="i2" class="altColor">
                                             <td class="colFirst"><code>abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a></code>
                                             </td>
-                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#clearBuff(LivingEntity)>clearBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity) </code>
+                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#clearBuff(org.bukkit.entity.LivingEntity)>clearBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity) </code>
                                             </th>
                                             <td class="colLast">清buff</td>
                                         </tr>
@@ -313,7 +321,7 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                         <tr id="i3" class="rowColor">
                                             <td class="colFirst"><code>abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a></code>
                                             </td>
-                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#removeBuff(LivingEntity,String)>removeBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source) </code>
+                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#removeBuff(org.bukkit.entity.LivingEntity,java.lang.String)>removeBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source) </code>
                                             </th>
                                             <td class="colLast">删buff</td>
                                         </tr>
@@ -321,7 +329,7 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                         <tr id="i4" class="altColor">
                                             <td class="colFirst"><code>abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a></code>
                                             </td>
-                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#removeIf(LivingEntity,String)>removeIf</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json) </code>
+                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#removeIf(org.bukkit.entity.LivingEntity,java.lang.String)>removeIf</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json) </code>
                                             </th>
                                             <td class="colLast">删除符合条件的buff数据</td>
                                         </tr>
@@ -329,7 +337,7 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                         <tr id="i5" class="rowColor">
                                             <td class="colFirst"><code>abstract <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a></code>
                                             </td>
-                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#matches(LivingEntity,String)>matches</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json) </code>
+                                            <th class="colSecond" scope="row"><code><a href=BuffDataManager.html#matches(org.bukkit.entity.LivingEntity,java.lang.String)>matches</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json) </code>
                                             </th>
                                             <td class="colLast">是否有符合条件(符合json)的buff数据</td>
                                         </tr>
@@ -388,7 +396,7 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                             </a>
                                 <h3>Method Detail</h3>
                                 
-                                <a id="giveBuff(LivingEntity,String,Buff,Consumer)">
+                                <a id="giveBuff(org.bukkit.entity.LivingEntity,java.lang.String,com.skillw.buffsystem.api.buff.Buff,java.util.function.Consumer)">
                                     <!--   -->
                                 </a>
                                 <ul class=
@@ -396,10 +404,12 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                           >
                                     <li class="blockList">
                                         <h4>giveBuff</h4>
-                                        <pre class="methodSignature"> abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=BuffDataManager.html#giveBuff(LivingEntity,String,Buff,Consumer)>giveBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source, <a href=../buff/Buff.html>Buff</a> buff, <a href=https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html>Consumer</a>&lt;<a href=../data/BuffData.html>BuffData</a>&gt; consumer)</pre>
+                                        <pre class="methodSignature"> abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=BuffDataManager.html#giveBuff(org.bukkit.entity.LivingEntity,java.lang.String,com.skillw.buffsystem.api.buff.Buff,java.util.function.Consumer)>giveBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source, <a href=../buff/Buff.html>Buff</a> buff, <a href=https://docs.oracle.com/javase/8/docs/api/java/util/function/Consumer.html>Consumer</a>&lt;<a href=../data/BuffData.html>BuffData</a>&gt; consumer)</pre>
                                         <div class="block"><p>给Buff</p></div>
-                                        
+
                                         <dl>
+
+                                        
                                             <dt><span class="paramLabel">Parameters:</span></dt>
                                             
                                             
@@ -418,13 +428,17 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                             <dd><code>consumer</code> - 处理buff数据</dd>
                                             
                                             
-                                        </dl>
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
-                                <a id="giveBuff(LivingEntity,String,Buff,String)">
+                                <a id="giveBuff(org.bukkit.entity.LivingEntity,java.lang.String,com.skillw.buffsystem.api.buff.Buff,java.lang.String)">
                                     <!--   -->
                                 </a>
                                 <ul class=
@@ -432,10 +446,12 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                           >
                                     <li class="blockList">
                                         <h4>giveBuff</h4>
-                                        <pre class="methodSignature"> abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=BuffDataManager.html#giveBuff(LivingEntity,String,Buff,String)>giveBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source, <a href=../buff/Buff.html>Buff</a> buff, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json)</pre>
+                                        <pre class="methodSignature"> abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=BuffDataManager.html#giveBuff(org.bukkit.entity.LivingEntity,java.lang.String,com.skillw.buffsystem.api.buff.Buff,java.lang.String)>giveBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source, <a href=../buff/Buff.html>Buff</a> buff, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json)</pre>
                                         <div class="block"><p>给Buff</p></div>
-                                        
+
                                         <dl>
+
+                                        
                                             <dt><span class="paramLabel">Parameters:</span></dt>
                                             
                                             
@@ -454,13 +470,17 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                             <dd><code>json</code> - json</dd>
                                             
                                             
-                                        </dl>
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
-                                <a id="clearBuff(LivingEntity)">
+                                <a id="clearBuff(org.bukkit.entity.LivingEntity)">
                                     <!--   -->
                                 </a>
                                 <ul class=
@@ -468,23 +488,29 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                           >
                                     <li class="blockList">
                                         <h4>clearBuff</h4>
-                                        <pre class="methodSignature"> abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=BuffDataManager.html#clearBuff(LivingEntity)>clearBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity)</pre>
+                                        <pre class="methodSignature"> abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=BuffDataManager.html#clearBuff(org.bukkit.entity.LivingEntity)>clearBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity)</pre>
                                         <div class="block"><p>清buff</p></div>
-                                        
+
                                         <dl>
+
+                                        
                                             <dt><span class="paramLabel">Parameters:</span></dt>
                                             
                                             
                                             <dd><code>entity</code> - 实体</dd>
                                             
                                             
-                                        </dl>
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
-                                <a id="removeBuff(LivingEntity,String)">
+                                <a id="removeBuff(org.bukkit.entity.LivingEntity,java.lang.String)">
                                     <!--   -->
                                 </a>
                                 <ul class=
@@ -492,10 +518,12 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                           >
                                     <li class="blockList">
                                         <h4>removeBuff</h4>
-                                        <pre class="methodSignature"> abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=BuffDataManager.html#removeBuff(LivingEntity,String)>removeBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source)</pre>
+                                        <pre class="methodSignature"> abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=BuffDataManager.html#removeBuff(org.bukkit.entity.LivingEntity,java.lang.String)>removeBuff</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> source)</pre>
                                         <div class="block"><p>删buff</p></div>
-                                        
+
                                         <dl>
+
+                                        
                                             <dt><span class="paramLabel">Parameters:</span></dt>
                                             
                                             
@@ -506,13 +534,17 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                             <dd><code>source</code> - buff源</dd>
                                             
                                             
-                                        </dl>
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
-                                <a id="removeIf(LivingEntity,String)">
+                                <a id="removeIf(org.bukkit.entity.LivingEntity,java.lang.String)">
                                     <!--   -->
                                 </a>
                                 <ul class=
@@ -520,10 +552,12 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                           >
                                     <li class="blockList">
                                         <h4>removeIf</h4>
-                                        <pre class="methodSignature"> abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=BuffDataManager.html#removeIf(LivingEntity,String)>removeIf</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json)</pre>
+                                        <pre class="methodSignature"> abstract <a href=https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html>Unit</a> <a href=BuffDataManager.html#removeIf(org.bukkit.entity.LivingEntity,java.lang.String)>removeIf</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json)</pre>
                                         <div class="block"><p>删除符合条件的buff数据</p></div>
-                                        
+
                                         <dl>
+
+                                        
                                             <dt><span class="paramLabel">Parameters:</span></dt>
                                             
                                             
@@ -534,13 +568,17 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                             <dd><code>json</code> - json</dd>
                                             
                                             
-                                        </dl>
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 
-                                <a id="matches(LivingEntity,String)">
+                                <a id="matches(org.bukkit.entity.LivingEntity,java.lang.String)">
                                     <!--   -->
                                 </a>
                                 <ul class=
@@ -548,10 +586,12 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                           >
                                     <li class="blockList">
                                         <h4>matches</h4>
-                                        <pre class="methodSignature"> abstract <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> <a href=BuffDataManager.html#matches(LivingEntity,String)>matches</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json)</pre>
+                                        <pre class="methodSignature"> abstract <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/Boolean.html>Boolean</a> <a href=BuffDataManager.html#matches(org.bukkit.entity.LivingEntity,java.lang.String)>matches</a>(<a href=https://doc.skillw.com/bukkit/org/bukkit/entity/LivingEntity.html>LivingEntity</a> entity, <a href=https://docs.oracle.com/javase/8/docs/api/java/lang/String.html>String</a> json)</pre>
                                         <div class="block"><p>是否有符合条件(符合json)的buff数据</p></div>
-                                        
+
                                         <dl>
+
+                                        
                                             <dt><span class="paramLabel">Parameters:</span></dt>
                                             
                                             
@@ -562,9 +602,16 @@ extends <a href=https://doc.skillw.com/pouvoir/com/skillw/pouvoir/api/plugin/map
                                             <dd><code>json</code> - json</dd>
                                             
                                             
-                                        </dl>
                                         
-                                        <!-- TODO missing return annotation -->
+
+                                        
+                                            <dt><span class="returnLabel">Returns:</span></dt>
+                                            <dd><p>是否有符合条件(符合json)的buff数据</p></dd>
+                                        
+
+                                        
+
+                                        </dl>
                                     </li>
                                 </ul>
                                 

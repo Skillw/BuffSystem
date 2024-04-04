@@ -1,8 +1,5 @@
 $dokka.format:javadoc-v1
 $dokka.linkExtension:html
-$dokka.location:com.skillw.buffsystem.api.buff/Buff.Companion///PointingToDeclaration/com/skillw/buffsystem/api/buff/Buff.Companion.html
-$dokka.location:com.skillw.buffsystem.api.data/BuffData.Companion///PointingToDeclaration/com/skillw/buffsystem/api/data/BuffData.Companion.html
-$dokka.location:com.skillw.buffsystem.api.data/BuffDataCompound.Companion///PointingToDeclaration/com/skillw/buffsystem/api/data/BuffDataCompound.Companion.html
 $dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Condition.Post///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Condition.Post.html
 $dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Condition.Pre///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Condition.Pre.html
 $dokka.location:com.skillw.buffsystem.api.event/BuffEvent.Condition///PointingToDeclaration/com/skillw/buffsystem/api/event/BuffEvent.Condition.html
