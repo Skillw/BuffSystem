@@ -5,7 +5,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    id("io.izzel.taboolib") version "2.0.11"
+    id("io.izzel.taboolib") version "2.0.22"
     id("org.jetbrains.kotlin.jvm") version "1.9.22"
     id("org.jetbrains.dokka") version "1.9.20"
     id("io.codearte.nexus-staging") version "0.30.0"
@@ -37,6 +37,7 @@ val api: String? by project
 task("api-add") {
     var version = project.version.toString() + (order?.let { "-$it" } ?: "")
     if (api != null && api == "common")
+
         version = "$version-api"
     project.version = version
 }
@@ -58,7 +59,14 @@ taboolib {
         }
     }
     env {
-        install(CONFIGURATION, LANG, BUKKIT_ALL, BUKKIT, NMS, CHAT, METRICS, NMS_UTIL)
+        install(Bukkit, BukkitHook, XSeries)
+
+        // database
+        install(Database,DatabasePlayer)
+        // NMS
+        install(BukkitNMS, BukkitNMSDataSerializer,BukkitNMSItemTag,BukkitNMSUtil)
+        // util
+        install(CommandHelper,BukkitFakeOp,Metrics, BukkitUtil,MinecraftChat)
     }
     classifier = null
     version {
@@ -67,7 +75,7 @@ taboolib {
             isSkipKotlinRelocate =true
             isSkipKotlin = true
         }
-        taboolib = "6.1.1-beta17"
+        taboolib = "6.2.2"
     }
 }
 
